@@ -73,10 +73,25 @@ async function insertExercise(name, muscle, difficulty, instructions) {
   }
 }
 
+async function updateExercise(id, name, muscle, difficulty, instructions) {
+  const params = [name, muscle, difficulty, instructions, id];
+
+  try {
+    const query = `UPDATE exercises SET name = ?, muscle = ?, difficulty = ?, instructions = ? WHERE id = ?`;
+    const result = await connection.promise().query(query, params);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong while trying to Update an exercise!");
+  }
+}
+
 module.exports = {
   getAllExercises,
   getExercisesByMuscle,
   getExercisesByDifficulty,
   getExercisesByFilters,
   insertExercise,
+  updateExercise,
 };

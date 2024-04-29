@@ -44,7 +44,28 @@ async function postExercise(req, res) {
   }
 }
 
+async function putExercise(req, res) {
+  const { id } = req.params;
+  const { name, muscle, difficulty, instructions } = req.body;
+  // TODO: add validation
+
+  try {
+    const result = await exercisesDB.updateExercise(
+      id,
+      name,
+      muscle,
+      difficulty,
+      instructions
+    );
+
+    res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+
 module.exports = {
   getExercises,
   postExercise,
+  putExercise,
 };
