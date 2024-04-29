@@ -74,9 +74,25 @@ async function getExercises(req, res) {
   }
 }
 
+async function insertExercise(req, res) {
+  const { name, muscle, difficulty, instructions } = req.body;
+  const params = [name, muscle, difficulty, instructions];
+  // TODO: add validation
+
+  try {
+    const query = `INSERT INTO exercises (name, muscle, difficulty, instructions) VALUES(?, ?, ?, ?)`;
+    const result = await connection.promise().query(query, params);
+
+    res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+
 module.exports = {
   // getAllExercises,
   // getExercisesByMuscle,
   // getExercisesByDifficulty,
   getExercises,
+  insertExercise,
 };
