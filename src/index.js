@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(exercisesRouter);
-app.use(adminRouter);
+app.use("/exercises", adminRouter);
 
 app.listen(port, function () {
   console.log(`Listening on ${port}`);

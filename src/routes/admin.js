@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const exercisesController = require("../controllers/exercisesController");
 
-router.post("/exercises", exercisesController.postExercise);
-router.put("/exercises/:id", exercisesController.putExercise);
+router.post("/", exercisesController.postExercise);
+router.put("/:id", exercisesController.putExercise);
 
 module.exports = router;
