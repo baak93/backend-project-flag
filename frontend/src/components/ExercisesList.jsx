@@ -12,9 +12,6 @@ function ExercisesList() {
     })();
   }, []);
 
-  console.log("exercises");
-  console.log(exercises);
-
   return (
     <>
       {exercises.map((exercise) => (
