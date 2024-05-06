@@ -61,6 +61,7 @@ import { Menubar } from "primereact/menubar";
 import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { Avatar } from "primereact/avatar";
+import { Button } from "primereact/button";
 
 function Header() {
   const itemRenderer = (item) => (
@@ -153,6 +154,23 @@ function Header() {
         placeholder="Search"
         type="text"
         className="w-8rem sm:w-auto"
+      />
+      <Button
+        label="Sign in"
+        size="small"
+        onClick={() => {
+          window.location.href = "/sign-in";
+        }}
+      />
+      <Button
+        label="Sign up"
+        severity="secondary"
+        size="small"
+        link
+        text
+        onClick={() => {
+          window.location.href = "/sign-up";
+        }}
       />
       <Avatar
         image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"

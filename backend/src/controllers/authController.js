@@ -42,6 +42,17 @@ async function loginUser(req, res) {
     return;
   }
 
+  const cookieData = {
+    userEmail: user.email,
+  };
+  const jsonCookieData = JSON.stringify(cookieData);
+
+  res.cookie("LoggedIn", jsonCookieData, {
+    httpOnly: true,
+    sameSite: "none",
+    secure: true,
+  });
+
   res.json({
     status: "success",
     message: "user Logged In",
