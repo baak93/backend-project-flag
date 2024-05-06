@@ -1,4 +1,4 @@
-const exercisesDB = require("../db/exercises");
+const exercisesDB = require("../db/exercisesDB");
 
 async function getExercises(req, res) {
   const { difficulty, muscle } = req.query;
@@ -64,8 +64,20 @@ async function putExercise(req, res) {
   }
 }
 
+async function deleteExercise(req, res) {
+  const id = req.params.id;
+
+  try {
+    const result = await exercisesDB.deleteExercise(id);
+    res.json(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
+
 module.exports = {
   getExercises,
   postExercise,
   putExercise,
+  deleteExercise,
 };

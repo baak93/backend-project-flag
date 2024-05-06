@@ -3,8 +3,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const exercisesRouter = require("./routes/exercises");
-const adminRouter = require("./routes/admin");
+const exercisesRouter = require("./routes/exercisesRouter");
+const adminRouter = require("./routes/adminRouter");
 
 const port = 3000;
 

@@ -1,4 +1,4 @@
-const connection = require("../db/connection");
+const connection = require("./connection");
 
 async function getAllExercises() {
   try {
@@ -87,6 +87,18 @@ async function updateExercise(id, name, muscle, difficulty, instructions) {
   }
 }
 
+async function deleteExercise(id = "") {
+  const query = `DELETE from exercises where id = ?`;
+
+  try {
+    const result = await connection.promise().query(query, id);
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Database error");
+  }
+}
+
 module.exports = {
   getAllExercises,
   getExercisesByMuscle,
@@ -94,4 +106,5 @@ module.exports = {
   getExercisesByFilters,
   insertExercise,
   updateExercise,
+  deleteExercise,
 };
