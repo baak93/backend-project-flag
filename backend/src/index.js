@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const exercisesRouter = require("./routes/exercisesRouter");
 const adminRouter = require("./routes/adminRouter");
+const userRouter = require("./routes/userRouter");
 
 const port = 3000;
 
@@ -17,6 +18,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(exercisesRouter);
+app.use(userRouter);
 app.use("/exercises", adminRouter);
 
 app.listen(port, function () {
