@@ -7,10 +7,6 @@ async function registerUser(req, res) {
   const hash = await encryptionService.createHash(password);
   const userId = await authDB.insertUser(name, email, hash);
 
-  // console.log(password);
-  // console.log(hash);
-  // console.log(userId);
-
   if (userId === -1) {
     res.status(400).json({
       message: "Error registering user",
@@ -25,6 +21,34 @@ async function registerUser(req, res) {
   });
 }
 
+async function loginUser(req, res) {
+  const { email, password } = req.body;
+
+  const user = await authDB.selectUser(email);
+
+  if (!user) {
+    res.status(400).json({
+      message: "User not found",
+    });
+    return;
+  }
+
+  const result = await encryptionService.verifyHash(user.password, password);
+  if (result !== true) {
+    res.status(400).json({
+      status: "Fail",
+      message: "wrong password",
+    });
+    return;
+  }
+
+  res.json({
+    status: "success",
+    message: "user Logged In",
+  });
+}
+
 module.exports = {
   registerUser,
+  loginUser,
 };
