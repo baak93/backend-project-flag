@@ -22,6 +22,28 @@ async function registerUser(username, email, password) {
   return result;
 }
 
+async function loginUser(email, password) {
+  const body = {
+    email,
+    password,
+  };
+
+  const options = {
+    method: "POST",
+    body: JSON.stringify(body),
+    headers: {
+      "Content-type": "application/json",
+    },
+    credentials: "include",
+  };
+
+  const response = await fetch(baseDomain + "/sign-in", options);
+  const result = await response.json();
+
+  return result;
+}
+
 export default {
   registerUser,
+  loginUser,
 };
