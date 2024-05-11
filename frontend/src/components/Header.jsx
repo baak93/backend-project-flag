@@ -88,23 +88,23 @@ function Header() {
       url: "http://localhost:5173/exercises",
     },
     {
-      label: "Routines",
+      label: "Workouts",
       icon: "pi pi-search",
       items: [
         {
-          label: "Core",
+          label: "Monday",
           icon: "pi pi-bolt",
           shortcut: "⌘+S",
           template: itemRenderer,
         },
         {
-          label: "Blocks",
+          label: "Tuesday",
           icon: "pi pi-server",
           shortcut: "⌘+B",
           template: itemRenderer,
         },
         {
-          label: "UI Kit",
+          label: "Chest & Triceps",
           icon: "pi pi-pencil",
           shortcut: "⌘+U",
           template: itemRenderer,
@@ -113,17 +113,17 @@ function Header() {
           separator: true,
         },
         {
-          label: "Templates",
+          label: "Back & Biceps",
           icon: "pi pi-palette",
           items: [
             {
-              label: "Apollo",
+              label: "Biceps Curls",
               icon: "pi pi-palette",
               badge: 2,
               template: itemRenderer,
             },
             {
-              label: "Ultima",
+              label: "Pull ups",
               icon: "pi pi-palette",
               badge: 3,
               template: itemRenderer,
