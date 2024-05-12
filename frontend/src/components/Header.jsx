@@ -1,189 +1,204 @@
-// import { useState, useEffect } from "react";
-// import { Link } from "wouter";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import { Link } from "wouter";
 
-// function Header() {
-//   const [menuOpen, setMenuOpen] = useState(false);
-//   const [showHeaderBackground, setShowHeaderBackground] = useState(false);
-
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       const shouldShowBackground = window.scrollY > 0;
-//       setShowHeaderBackground(shouldShowBackground);
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, []);
-
-//   return (
-//     <>
-//       {showHeaderBackground && <div className="headerBackground"></div>}
-//       <div className={`header ${menuOpen ? "open" : ""}`}>
-//         <Link href="/">
-//           Workout App <img src="images/blog-icon.svg" alt="App Icon" />
-//         </Link>
-//         <div className="menuIcon" onClick={() => setMenuOpen(true)}>
-//           ☰
-//         </div>
-//         <div className="menuMask" onClick={() => setMenuOpen(false)}></div>
-//         <div className="closeMenuIcon" onClick={() => setMenuOpen(false)}>
-//           ☒
-//         </div>
-//         <ul className={`menuNav ${menuOpen ? "open" : ""}`}>
-//           <li>
-//             <Link href="/" onClick={() => setMenuOpen(false)}>
-//               Home
-//             </Link>
-//           </li>
-//           <li>
-//             <Link href="/exercises" onClick={() => setMenuOpen(false)}>
-//               All Exercises
-//             </Link>
-//           </li>
-//           <li>
-//             <Link href="/myroutine" onClick={() => setMenuOpen(false)}>
-//               Routines
-//             </Link>
-//           </li>
-//         </ul>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default Header;
-
-import React from "react";
-import { Menubar } from "primereact/menubar";
-import { InputText } from "primereact/inputtext";
-import { Badge } from "primereact/badge";
-import { Avatar } from "primereact/avatar";
-import { Button } from "primereact/button";
+const pages = ["Exercises", "Workouts", "Contacts"];
+const settings = ["Profile", "Settings", "Logout"];
 
 function Header() {
-  const itemRenderer = (item) => (
-    <a className="flex align-items-center p-menuitem-link">
-      <span className={item.icon} />
-      <span className="mx-2">{item.label}</span>
-      {item.badge && <Badge className="ml-auto" value={item.badge} />}
-      {item.shortcut && (
-        <span className="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">
-          {item.shortcut}
-        </span>
-      )}
-    </a>
-  );
-  const items = [
-    {
-      label: "Home",
-      icon: "pi pi-home",
-      url: "http://localhost:5173/",
-    },
-    {
-      label: "All Exercises",
-      icon: "pi pi-star",
-      url: "http://localhost:5173/exercises",
-    },
-    {
-      label: "Workouts",
-      icon: "pi pi-search",
-      items: [
-        {
-          label: "Monday",
-          icon: "pi pi-bolt",
-          shortcut: "⌘+S",
-          template: itemRenderer,
-        },
-        {
-          label: "Tuesday",
-          icon: "pi pi-server",
-          shortcut: "⌘+B",
-          template: itemRenderer,
-        },
-        {
-          label: "Chest & Triceps",
-          icon: "pi pi-pencil",
-          shortcut: "⌘+U",
-          template: itemRenderer,
-        },
-        {
-          separator: true,
-        },
-        {
-          label: "Back & Biceps",
-          icon: "pi pi-palette",
-          items: [
-            {
-              label: "Biceps Curls",
-              icon: "pi pi-palette",
-              badge: 2,
-              template: itemRenderer,
-            },
-            {
-              label: "Pull ups",
-              icon: "pi pi-palette",
-              badge: 3,
-              template: itemRenderer,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: "Contact",
-      icon: "pi pi-envelope",
-      badge: 3,
-      template: itemRenderer,
-    },
-  ];
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const start = (
-    <img
-      alt="logo"
-      src="https://primefaces.org/cdn/primereact/images/logo.png"
-      height="40"
-      className="mr-2"
-    ></img>
-  );
-  const end = (
-    <div className="flex align-items-center gap-2">
-      <InputText
-        placeholder="Search"
-        type="text"
-        className="w-8rem sm:w-auto"
-      />
-      <Button
-        label="Sign in"
-        size="small"
-        onClick={() => {
-          window.location.href = "/sign-in";
-        }}
-      />
-      <Button
-        label="Sign up"
-        severity="secondary"
-        size="small"
-        link
-        text
-        onClick={() => {
-          window.location.href = "/sign-up";
-        }}
-      />
-      <Avatar
-        image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
-        shape="circle"
-      />
-    </div>
-  );
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   return (
-    <div className="card">
-      <Menubar model={items} start={start} end={end} />
-    </div>
+    <>
+      <AppBar
+        position="sticky"
+        color="error"
+        sx={{ backgroundColor: "#ff2625" }}
+      >
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <FitnessCenterIcon
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              FitPlanner
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: "block", md: "none" },
+                }}
+              >
+                {pages.map((page) => (
+                  <Link to={page} style={{ textDecoration: "none" }}>
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  </Link>
+                ))}
+              </Menu>
+            </Box>
+            <FitnessCenterIcon
+              sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+            />
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              Fit Planner
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+              {pages.map((page) => (
+                <Link to={page} style={{ textDecoration: "none" }}>
+                  <Button
+                    key={page}
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "#fff", display: "block" }}
+                  >
+                    <span style={{ fontWeight: 600 }}>{page}</span>
+                  </Button>
+                </Link>
+              ))}
+            </Box>
+
+            <Box sx={{ flexGrow: 0 }}>
+              <Button
+                href="/sign-in"
+                variant="contained"
+                size="meddium"
+                style={{ textDecoration: "none", backgroundColor: "#fff" }}
+              >
+                <span
+                  style={{
+                    color: "#ff2625",
+                    padding: "0 12px",
+                    fontWeight: 700,
+                  }}
+                >
+                  Sign-in
+                </span>
+              </Button>
+              <Button href="/sign-up" style={{ textDecoration: "none" }}>
+                <span
+                  style={{
+                    color: "#fff",
+                    padding: "0 12px",
+                    fontWeight: 700,
+                  }}
+                >
+                  Sign-up
+                </span>
+              </Button>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar src="/broken-image.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   );
 }
-
 export default Header;
