@@ -14,8 +14,8 @@ function ExercisesList() {
 
   return (
     <>
-      {exercises.map((exercise) => (
-        <ExerciseCard exercise={exercise} />
+      {exercises.map((exercise, index) => (
+        <ExerciseCard exercise={exercise} key={index} />
       ))}
     </>
   );

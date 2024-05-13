@@ -13,12 +13,12 @@ async function getAllExercises() {
 }
 
 async function getExercisesByMuscle(muscle) {
-  const params = [muscle];
+  const params = [`%${muscle}%`];
 
   try {
     const [result] = await connection
       .promise()
-      .query(`SELECT * FROM exercises WHERE muscle = ?`, params);
+      .query(`SELECT * FROM exercises WHERE muscle LIKE ?`, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -41,13 +41,13 @@ async function getExercisesByDifficulty(difficulty) {
 }
 
 async function getExercisesByFilters(difficulty, muscle) {
-  const params = [difficulty, muscle];
+  const params = [difficulty, `%${muscle}%`];
 
   try {
     const [result] = await connection
       .promise()
       .query(
-        `SELECT * FROM exercises WHERE difficulty = ? AND muscle = ?`,
+        `SELECT * FROM exercises WHERE difficulty = ? AND muscle LIKE ?`,
         params
       );
     return result;

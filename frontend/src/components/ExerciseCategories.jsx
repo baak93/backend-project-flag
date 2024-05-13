@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
 function ExerciseCategories() {
+  const [search, setSearch] = useState("");
+
+  async function handleSearch() {
+    if (search) {
+      // const exerciseData = await fetchData();
+    }
+  }
+
   return (
     <>
       <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
@@ -11,19 +19,19 @@ function ExerciseCategories() {
           mb="49px"
           textAlign="center"
         >
-          Awesome Exercises You <br /> Should Know
+          Looking for a unique workout <br /> Check out these categories
         </Typography>
         <Box position="relative" mb="72px">
           <TextField
             height="76px"
             sx={{
               input: { fontWeight: "700", border: "none", borderRadius: "4px" },
-              width: { lg: "1170px", xs: "350px" },
+              width: { lg: "60vw", xs: "350px" },
               backgroundColor: "#fff",
               borderRadius: "40px",
             }}
-            value=""
-            onChange={(e) => {}}
+            value={search}
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
             placeholder="Search Exercises"
             type="text"
           />
@@ -39,6 +47,7 @@ function ExerciseCategories() {
               right: "0px",
               fontSize: { lg: "20px", xs: "14px" },
             }}
+            onClick={handleSearch}
           >
             Search
           </Button>

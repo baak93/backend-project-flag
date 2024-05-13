@@ -11,7 +11,7 @@ function Hero() {
         p="20px"
       >
         <Typography color="#FF2625" fontWeight="600" fontSize="26px">
-          Fitness Club
+          Elevate Your Workout Experience
         </Typography>
         <Typography
           fontWeight={700}
@@ -19,8 +19,8 @@ function Hero() {
           mb="23px"
           mt="30px"
         >
-          Sweat, Smile <br />
-          And Repeat
+          Sweat today, <br />
+          Succeed tomorrow
         </Typography>
         <Typography
           fontSize="22px"
@@ -28,7 +28,8 @@ function Hero() {
           lineHeight="35px"
           mb={3}
         >
-          Check out the most effective exercises
+          It's time to spice up your exercise routine <br />
+          and give your body and mind a fresh challenge
         </Typography>
         {/* <Button variant="contained" color="error" href="/exercises">
           Explore Exercises
@@ -61,7 +62,7 @@ function Hero() {
             fontSize: "200px",
           }}
         >
-          Exercise
+          Workhard
         </Typography>
         <img
           src={HeroBannerImage}
