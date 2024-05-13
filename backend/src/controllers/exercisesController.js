@@ -18,6 +18,9 @@ async function getExercises(req, res) {
       res.json(result);
     } else {
       const result = await exercisesDB.getAllExercises();
+      result.forEach((exercise) => {
+        exercise.image = process.env.DOMAIN + exercise.image;
+      }); //lê o url da variavel de ambiente e concatena com o caminho da imagem da base de dados
       res.json(result);
     }
   } catch (error) {
