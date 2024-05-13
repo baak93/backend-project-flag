@@ -36,7 +36,7 @@ export default function ExerciseCard({ exercise }) {
   const muscles = exercise.muscle.split(",").map((muscle) => muscle.trim());
 
   return (
-    <Card sx={{ maxWidth: 345, marginTop: "24px" }}>
+    <Card sx={{ maxWidth: 345, marginTop: "24px", minHeight: 400 }}>
       <CardActionArea>
         <CardMedia
           component="img"
