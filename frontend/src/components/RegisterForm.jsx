@@ -1,19 +1,28 @@
-import { Message } from "primereact/message";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import { Button } from "primereact/button";
 import { useState, useRef } from "react";
-import { Toast } from "primereact/toast";
+import {
+  Snackbar,
+  IconButton,
+  Input,
+  Button,
+  Card,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  const toast = useRef(null);
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await usersServerCall.registerUser(
       username,
@@ -23,67 +32,70 @@ function RegisterForm() {
     console.log(result);
 
     if (result.message) {
-      toast.current.show({
-        severity: "error",
-        summary: "Error registering user",
-        // detail: "Nope",
-      });
+      setSnackbarMessage("Error registering user");
     } else {
-      toast.current.show({
-        severity: "success",
-        summary: "User registered successfully",
-        // detail: "Nope",
-      });
+      setSnackbarMessage("User registered successfully");
     }
-  }
+    setSnackbarOpen(true);
+  };
 
   return (
     <>
-      <Toast ref={toast} />
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+        message={snackbarMessage}
+        action={
+          <>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </>
+        }
+      />
       <form onSubmit={handleSubmit}>
-        <div className="card">
-          <div className="flex flex-wrap align-items-center mb-3 mt-3 gap-2">
-            <label htmlFor="username" className="p-sr-only">
-              Username
-            </label>
-            <InputText
-              id="username"
+        <Card variant="outlined" sx={{ p: 2, mt: 3 }}>
+          <CardContent>
+            <Typography variant="h5" component="h2" gutterBottom>
+              Register
+            </Typography>
+            <Input
               placeholder="Username"
-              className="p-invalid mr-2"
+              fullWidth
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              sx={{ mb: 2 }}
             />
-            <Message severity="error" text="Username is required" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="email" className="p-sr-only">
-              Email
-            </label>
-            <InputText
-              id="email"
+            <Input
               placeholder="Email"
-              className="p-invalid mr-2"
+              fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              sx={{ mb: 2 }}
             />
-            <Message severity="error" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="password" className="p-sr-only">
-              Password
-            </label>
-            <Password
-              id="password"
+            <Input
+              type="password"
               placeholder="Password"
-              className="p-invalid mr-2"
+              fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              tabIndex={1}
+              sx={{ mb: 2 }}
             />
-            <Message severity="error" />
-          </div>
-          <Button type="submit" label="Register" />
-        </div>
+            <Button type="submit" variant="contained" color="primary">
+              Register
+            </Button>
+          </CardContent>
+        </Card>
       </form>
     </>
   );
