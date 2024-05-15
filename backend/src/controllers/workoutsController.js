@@ -21,6 +21,17 @@ async function createWorkout(req, res) {
   }
 }
 
+async function getWorkoutsByUserId(req, res) {
+  const user_id = req.params.id;
+
+  const query = `SELECT * FROM workouts WHERE user_id = ?`;
+  const params = [user_id];
+
+  const workoutsResult = await connection.promise().query(query, params);
+  console.log(workoutsResult);
+  res.json(workoutsResult);
+}
+
 function deleteWorkout() {}
 
 // function editWorkoutTitle() {}
@@ -31,6 +42,7 @@ function removeExerciseFromWorkout() {}
 
 module.exports = {
   createWorkout,
+  getWorkoutsByUserId,
   deleteWorkout,
   addExerciseToWorkout,
   removeExerciseFromWorkout,

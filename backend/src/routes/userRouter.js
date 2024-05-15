@@ -5,7 +5,8 @@ const cookiesController = require("../controllers/cookiesController");
 
 router.post("/sign-up", authController.registerUser);
 router.post("/sign-in", authController.loginUser);
-router.post("/workout", workoutsController.createWorkout);
+router.post("/workouts", workoutsController.createWorkout);
+router.get("/workouts/:id", workoutsController.getWorkoutsByUserId);
 router.get("/cookies", cookiesController.getCookies);
 
 module.exports = router;

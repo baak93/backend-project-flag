@@ -95,9 +95,13 @@ function Header() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
-                  <Link to={page} style={{ textDecoration: "none" }}>
-                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                {pages.map((page, index) => (
+                  <Link
+                    key={index}
+                    to={page}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">{page}</Typography>
                     </MenuItem>
                   </Link>
@@ -126,10 +130,9 @@ function Header() {
               Fit Planner
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
-                <Link to={page} style={{ textDecoration: "none" }}>
+              {pages.map((page, index) => (
+                <Link key={index} to={page} style={{ textDecoration: "none" }}>
                   <Button
-                    key={page}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: "#fff", display: "block" }}
                   >

@@ -10,11 +10,19 @@ async function postWorkout(workoutData) {
     credentials: "include",
   };
 
-  const response = await fetch(baseDomain + "/workout", options);
+  const response = await fetch(baseDomain + "/workouts", options);
   const data = await response.json();
   return data;
 }
 
+async function getWorkoutsByUserId(user_id) {
+  const response = await fetch(baseDomain + "/workouts/" + user_id);
+  const data = await response.json();
+
+  return data[0];
+}
+
 export default {
   postWorkout,
+  getWorkoutsByUserId,
 };

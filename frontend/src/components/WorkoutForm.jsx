@@ -2,7 +2,7 @@ import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import cookiesServerCall from "../services/cookiesServerCall";
-import workoutServerCall from "../services/workoutsServerCall"; // Importe a função postWorkout
+import workoutServerCall from "../services/workoutsServerCall";
 import { useLocation } from "wouter";
 
 function WorkoutForm() {
@@ -24,8 +24,11 @@ function WorkoutForm() {
       }
       const userDataObject = JSON.parse(userLoggedIn);
       const user_id = userDataObject.userID;
+
       if (!title) {
         throw new Error("Missing workout title");
+      } else {
+        setLocation("/workouts");
       }
 
       // Cria o objeto de dados a ser enviado para o backend
@@ -39,8 +42,6 @@ function WorkoutForm() {
     } catch (error) {
       console.error(error);
     }
-
-    setLocation("/workouts");
   }
 
   return (
