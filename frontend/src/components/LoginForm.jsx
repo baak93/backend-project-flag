@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { TextField, Button, Snackbar } from "@mui/material";
+import { TextField, Button, Snackbar, SnackbarContent } from "@mui/material";
 import usersServerCall from "../services/usersServerCall";
 
 function LoginForm() {
@@ -31,13 +31,14 @@ function LoginForm() {
 
   return (
     <>
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        message={message}
-        variant={variant}
-      />
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <SnackbarContent
+          style={{
+            backgroundColor: variant === "error" ? "red" : "green", // Defina a cor com base na variável de estado "variant"
+          }}
+          message={<span id="client-snackbar">{message}</span>}
+        />
+      </Snackbar>
       <form onSubmit={handleSubmit}>
         <div className="card">
           <div className="flex flex-wrap align-items-center mb-3 gap-2">

@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   Typography,
+  SnackbarContent,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
@@ -17,6 +18,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarVariant, setSnackbarVariant] = useState("success"); // Nova variável para controlar a cor da Snackbar
 
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
@@ -32,8 +34,10 @@ function RegisterForm() {
     console.log(result);
 
     if (result.message) {
+      setSnackbarVariant("error"); // Define a cor como vermelho em caso de erro
       setSnackbarMessage("Error registering user");
     } else {
+      setSnackbarVariant("success"); // Define a cor como verde em caso de sucesso
       setSnackbarMessage("User registered successfully");
     }
     setSnackbarOpen(true);
@@ -49,20 +53,26 @@ function RegisterForm() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={handleSnackbarClose}
-        message={snackbarMessage}
-        action={
-          <>
-            <IconButton
-              size="small"
-              aria-label="close"
-              color="inherit"
-              onClick={handleSnackbarClose}
-            >
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </>
-        }
-      />
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: snackbarVariant === "error" ? "red" : "green", // Define a cor com base na variável snackbarVariant
+          }}
+          message={<span id="client-snackbar">{snackbarMessage}</span>}
+          action={
+            <>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleSnackbarClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </>
+          }
+        />
+      </Snackbar>
       <form onSubmit={handleSubmit}>
         <Card variant="outlined" sx={{ p: 2, mt: 3 }}>
           <CardContent>

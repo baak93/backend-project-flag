@@ -22,6 +22,9 @@ function WorkoutForm() {
       }
       const userDataObject = JSON.parse(userLoggedIn);
       const user_id = userDataObject.userID;
+      if (!title) {
+        throw new Error("Missing workout title");
+      }
 
       // Cria o objeto de dados a ser enviado para o backend
       const workoutData = {
