@@ -1,18 +1,18 @@
 const connection = require("../db/connection");
 
 async function createWorkout(req, res) {
-  const { userId, title } = req.body;
+  const { user_id, title } = req.body;
 
   try {
     const query = `INSERT INTO workouts (title, user_id) VALUES (?, ?)`;
-    const params = [title, userId];
+    const params = [title, user_id];
 
     const workoutResult = await connection.promise().query(query, params);
     const workoutId = workoutResult[0].insertId;
     const workoutData = {
       workoutId,
       title,
-      userId,
+      user_id,
     };
     res.json(workoutData);
   } catch (error) {
