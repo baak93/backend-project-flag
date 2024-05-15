@@ -9,8 +9,8 @@ export default function WorkoutCard({ workout }) {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card sx={{ height: "100%" }}>
-        <CardActionArea>
+      <Card sx={{ height: "100%", position: "relative" }}>
+        <CardActionArea style={{ flexGrow: 1 }}>
           <CardContent>
             <Typography
               gutterBottom
@@ -20,12 +20,9 @@ export default function WorkoutCard({ workout }) {
             >
               {title}
             </Typography>
-            {/* <Typography variant="body2" color="text.secondary" component="div">
-              Total Exercises: {exercises.length}
-            </Typography> */}
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        <CardActions style={{ position: "absolute", bottom: 8, right: 8 }}>
           <Button
             variant="contained"
             size="small"
