@@ -1,8 +1,7 @@
-function createWorkout() {
-  window.location.href = "/createworkout";
-}
-
 function WorkoutView() {
+  function createWorkout() {
+    window.location.href = "/createworkout";
+  }
   return (
     <>
       <div>WorkoutView</div>

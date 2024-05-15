@@ -3,9 +3,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import cookiesServerCall from "../services/cookiesServerCall";
 import workoutServerCall from "../services/workoutsServerCall"; // Importe a função postWorkout
+import { useLocation } from "wouter";
 
 function WorkoutForm() {
   const [title, setTitle] = useState("");
+  const [location, setLocation] = useLocation();
 
   function handleTitleChange(event) {
     setTitle(event.target.value);
@@ -37,6 +39,8 @@ function WorkoutForm() {
     } catch (error) {
       console.error(error);
     }
+
+    setLocation("/workouts");
   }
 
   return (
