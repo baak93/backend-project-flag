@@ -1,0 +1,10 @@
+Create workout page
+Logout -> delete cookies
+Create and add exercises to a workout
+Edit workout title
+Create detail exercise page
+Avatar and sign-in/sign-up 
+Edit password 
+Validade email
+Footer
+
