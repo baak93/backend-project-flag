@@ -69,6 +69,7 @@ async function loginUser(req, res) {
   const cookieData = {
     userEmail: user.email,
     userID: user.id,
+    username: user.name,
   };
   const jsonCookieData = JSON.stringify(cookieData);
 
