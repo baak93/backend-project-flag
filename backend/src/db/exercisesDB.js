@@ -59,6 +59,18 @@ async function getExercisesByFilters(difficulty, muscle) {
   }
 }
 
+async function getExercisesByWorkoutId(workout_id) {
+  const params = [workout_id];
+  const query = `SELECT exercises.id, exercises.name, exercises.muscle, exercises.difficulty, exercises.instructions, exercises.image
+  FROM exercises 
+  JOIN workouts_exercises ON exercises.id = workouts_exercises.exercise_id
+  JOIN workouts ON workouts_exercises.workout_id = workouts.id
+  WHERE workouts.id = ?`;
+
+  const result = await connection.promise().query(query, params);
+  return result;
+}
+
 async function insertExercise(name, muscle, difficulty, instructions) {
   const params = [name, muscle, difficulty, instructions];
 
@@ -104,6 +116,7 @@ module.exports = {
   getExercisesByMuscle,
   getExercisesByDifficulty,
   getExercisesByFilters,
+  getExercisesByWorkoutId,
   insertExercise,
   updateExercise,
   deleteExercise,

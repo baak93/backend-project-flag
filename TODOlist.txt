@@ -1,10 +1,17 @@
-Create workout page
-Logout -> delete cookies
-Create and add exercises to a workout
-Edit workout title
-Create detail exercise page
-Avatar and sign-in/sign-up 
-Edit password 
-Validade email
-Footer
+	Filtro com search e tags na pagina exercises
+	Logout -> delete cookies
+	Create and add exercises to a workout
+	Edit workout title
+	Avatar and sign-in/sign-up 
+	Edit password 
+	Validade email
+	Footer
+	Page not found
+
+	ok - Create workout page
+	ok - Create detail exercise page
+
+DÚVIDAS
+
+	1 - Quando estou, por exemplo, no caminho http://localhost:5173/workoutdetail/32 quando clico no exercises sou direcionado para o caminho http://localhost:5173/workoutdetail/Exercises e nao para http://localhost:5173/Exercises. Como posso resolver?
 

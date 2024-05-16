@@ -9,6 +9,13 @@ async function getAllExercises() {
   return result;
 }
 
+async function getExercisesByWorkoutId(id) {
+  const response = await fetch(baseDomain + "/workoutdetail/" + id);
+  const result = await response.json();
+  return result;
+}
+
 export default {
   getAllExercises,
+  getExercisesByWorkoutId,
 };

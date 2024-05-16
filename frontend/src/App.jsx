@@ -7,6 +7,7 @@ import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import WorkoutForm from "./components/WorkoutForm";
 import WorkoutView from "./views/WorkoutView";
+import WorkoutDetail from "./components/WorkoutDetail";
 
 function App() {
   return (
@@ -18,6 +19,9 @@ function App() {
         <Route path="/workouts" component={WorkoutView} />
         <Route path="/createworkout" component={WorkoutForm} />
         <Route path="/exercises" component={ExercisesList} />
+        <Route path="/workoutdetail/:id">
+          {(params) => <WorkoutDetail id={params.id} />}
+        </Route>
         <Route path="/sign-up" component={RegisterForm} />
         <Route path="/sign-in" component={LoginForm} />
       </Switch>

@@ -96,15 +96,14 @@ function Header() {
                 }}
               >
                 {pages.map((page, index) => (
-                  <Link
+                  <MenuItem
                     key={index}
-                    to={page}
-                    style={{ textDecoration: "none" }}
+                    onClick={handleCloseNavMenu}
+                    component={Link}
+                    href={`/${page}`}
                   >
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{page}</Typography>
-                    </MenuItem>
-                  </Link>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
                 ))}
               </Menu>
             </Box>
@@ -131,14 +130,15 @@ function Header() {
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page, index) => (
-                <Link key={index} to={page} style={{ textDecoration: "none" }}>
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "#fff", display: "block" }}
-                  >
-                    <span style={{ fontWeight: 600 }}>{page}</span>
-                  </Button>
-                </Link>
+                <Button
+                  key={index}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "#fff", display: "block" }}
+                  component={Link}
+                  href={`/${page}`}
+                >
+                  <span style={{ fontWeight: 600 }}>{page}</span>
+                </Button>
               ))}
             </Box>
 
@@ -204,4 +204,5 @@ function Header() {
     </>
   );
 }
+
 export default Header;
