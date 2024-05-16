@@ -1,29 +1,53 @@
-import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
-import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import { useEffect, useState } from "react";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  FitnessCenter as FitnessCenterIcon,
+} from "@mui/icons-material";
 import { Link } from "wouter";
+import cookiesServerCall from "../services/cookiesServerCall";
 
 const pages = ["Exercises", "Workouts", "Contacts"];
 const settings = ["Profile", "Settings", "Logout"];
 
 function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const cookies = await cookiesServerCall.getCookies();
+        if (cookies.LoggedIn) {
+          setLoggedIn(true);
+          setUserData(JSON.parse(cookies.LoggedIn));
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+
+    fetchUserData();
+  }, []);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -35,6 +59,9 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  console.log("userData.username");
+  console.log(userData);
 
   return (
     <>
@@ -143,38 +170,54 @@ function Header() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Button
-                href="/sign-in"
-                variant="contained"
-                size="meddium"
-                style={{ textDecoration: "none", backgroundColor: "#fff" }}
-              >
-                <span
-                  style={{
-                    color: "#ff2625",
-                    padding: "0 12px",
-                    fontWeight: 700,
-                  }}
-                >
-                  Sign-in
-                </span>
-              </Button>
-              <Button href="/sign-up" style={{ textDecoration: "none" }}>
-                <span
-                  style={{
-                    color: "#fff",
-                    padding: "0 12px",
-                    fontWeight: 700,
-                  }}
-                >
-                  Sign-up
-                </span>
-              </Button>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar src="/broken-image.jpg" />
-                </IconButton>
-              </Tooltip>
+              {loggedIn && (
+                <>
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography
+                      variant="body1"
+                      sx={{ color: "#fff", marginRight: 1 }}
+                    >
+                      Welcome, {userData.username}
+                    </Typography>
+                    <Tooltip title="Open settings">
+                      <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <Avatar src="/broken-image.jpg" />
+                      </IconButton>
+                    </Tooltip>
+                  </Box>
+                </>
+              )}
+              {!loggedIn && (
+                <>
+                  <Button
+                    href="/sign-in"
+                    variant="contained"
+                    size="meddium"
+                    style={{ textDecoration: "none", backgroundColor: "#fff" }}
+                  >
+                    <span
+                      style={{
+                        color: "#ff2625",
+                        padding: "0 12px",
+                        fontWeight: 700,
+                      }}
+                    >
+                      Sign-in
+                    </span>
+                  </Button>
+                  <Button href="/sign-up" style={{ textDecoration: "none" }}>
+                    <span
+                      style={{
+                        color: "#fff",
+                        padding: "0 12px",
+                        fontWeight: 700,
+                      }}
+                    >
+                      Sign-up
+                    </span>
+                  </Button>
+                </>
+              )}
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
