@@ -46,6 +46,11 @@ async function getExercises(req, res) {
   }
 }
 
+async function getExerciseCategories(req, res) {
+  const result = await exercisesDB.getCategories();
+  res.json(result);
+}
+
 async function postExercise(req, res) {
   const { name, muscle, difficulty, instructions } = req.body;
   // TODO: add validation
@@ -97,6 +102,7 @@ async function deleteExercise(req, res) {
 
 module.exports = {
   getExercises,
+  getExerciseCategories,
   postExercise,
   putExercise,
   deleteExercise,

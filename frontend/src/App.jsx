@@ -8,6 +8,7 @@ import LoginForm from "./components/LoginForm";
 import WorkoutForm from "./components/WorkoutForm";
 import WorkoutView from "./views/WorkoutView";
 import WorkoutDetail from "./components/WorkoutDetail";
+import ExercisesView from "./views/ExercisesView";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/" component={HomeView} />
         <Route path="/workouts" component={WorkoutView} />
         <Route path="/createworkout" component={WorkoutForm} />
-        <Route path="/exercises" component={ExercisesList} />
+        <Route path="/exercises" component={ExercisesView} />
         <Route path="/workoutdetail/:id">
           {(params) => <WorkoutDetail id={params.id} />}
         </Route>

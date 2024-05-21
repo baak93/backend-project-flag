@@ -1,8 +1,9 @@
 	Filtro com search e tags na pagina exercises
 	Logout -> delete cookies
+	maxage para dar validade às cookies
 	Create and add exercises to a workout
 	Edit workout title
-	Avatar and sign-in/sign-up 
+	Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn)
 	Edit password 
 	Validade email
 	Footer

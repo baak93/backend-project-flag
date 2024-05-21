@@ -15,7 +15,16 @@ async function getExercisesByWorkoutId(id) {
   return result;
 }
 
+async function getExerciseCategories() {
+  const response = await fetch(baseDomain + "/exercises/categories");
+  const result = await response.json();
+  const muscleValues = result.flatMap((item) => item.muscle.split(", "));
+  const uniqueMuscles = [...new Set(muscleValues)];
+  return uniqueMuscles;
+}
+
 export default {
   getAllExercises,
   getExercisesByWorkoutId,
+  getExerciseCategories,
 };

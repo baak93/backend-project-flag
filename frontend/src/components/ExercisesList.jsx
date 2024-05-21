@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import exercisesServerCalls from "../services/exercisesServerCall";
+import exercisesServerCall from "../services/exercisesServerCall";
 import ExerciseCard from "./ExerciseCard";
 
 function ExercisesList() {
@@ -8,7 +8,7 @@ function ExercisesList() {
 
   useEffect(function () {
     (async function () {
-      const results = await exercisesServerCalls.getAllExercises();
+      const results = await exercisesServerCall.getAllExercises();
       setExercises(results);
     })();
   }, []);

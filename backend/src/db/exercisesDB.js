@@ -71,6 +71,19 @@ async function getExercisesByWorkoutId(workout_id) {
   return result;
 }
 
+async function getCategories() {
+  try {
+    const [result] = await connection
+      .promise()
+      .query(`SELECT muscle FROM exercises`);
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong! Couldn't get categories.");
+  }
+}
+
 async function insertExercise(name, muscle, difficulty, instructions) {
   const params = [name, muscle, difficulty, instructions];
 
@@ -117,6 +130,7 @@ module.exports = {
   getExercisesByDifficulty,
   getExercisesByFilters,
   getExercisesByWorkoutId,
+  getCategories,
   insertExercise,
   updateExercise,
   deleteExercise,
