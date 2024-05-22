@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 
-function ExerciseCategories() {
+function ExerciseSearchBar() {
   const [search, setSearch] = useState("");
 
   async function handleSearch() {
@@ -57,4 +57,4 @@ function ExerciseCategories() {
   );
 }
 
-export default ExerciseCategories;
+export default ExerciseSearchBar;

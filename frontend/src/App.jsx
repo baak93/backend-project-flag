@@ -1,5 +1,4 @@
 import { Route, Switch } from "wouter";
-import ExercisesList from "./components/ExercisesList";
 import Header from "./components/Header";
 import HomeView from "./views/HomeView";
 import ScrollToTop from "./components/ScrollToTop";

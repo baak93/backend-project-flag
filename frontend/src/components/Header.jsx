@@ -60,9 +60,6 @@ function Header() {
     setAnchorElUser(null);
   };
 
-  console.log("userData.username");
-  console.log(userData);
-
   return (
     <>
       <AppBar

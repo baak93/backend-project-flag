@@ -1,27 +1,51 @@
 import { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import exercisesServerCall from "../services/exercisesServerCall";
 import ExerciseCard from "./ExerciseCard";
+import { useLocation } from "wouter";
 
-function ExercisesList() {
+function ExercisesView() {
   const [exercises, setExercises] = useState([]);
+  const [location] = useLocation();
 
-  useEffect(function () {
+  useEffect(() => {
     (async function () {
-      const results = await exercisesServerCall.getAllExercises();
-      setExercises(results);
+      const params = new URLSearchParams(window.location.search);
+      const muscle = params.get("muscle");
+      const difficulty = params.get("difficulty");
+
+      if (muscle && difficulty) {
+        const results = await exercisesServerCall.getExercisesByFilters(
+          muscle,
+          difficulty
+        );
+        setExercises(results);
+      } else if (muscle) {
+        const results = await exercisesServerCall.getExercisesByMuscle(muscle);
+        setExercises(results);
+      } else if (difficulty) {
+        const results = await exercisesServerCall.getExercisesByDifficulty(
+          difficulty
+        );
+        setExercises(results);
+      } else {
+        const results = await exercisesServerCall.getAllExercises();
+        setExercises(results);
+      }
     })();
-  }, []);
+  }, [location]);
 
   return (
-    <Grid container spacing={2}>
-      {exercises.map((exercise, index) => (
-        <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-          <ExerciseCard exercise={exercise} />
-        </Grid>
-      ))}
-    </Grid>
+    <Box sx={{ padding: "16px" }}>
+      <Grid container spacing={3} justifyContent="center">
+        {exercises.map((exercise, index) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+            <ExerciseCard exercise={exercise} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
-export default ExercisesList;
+export default ExercisesView;

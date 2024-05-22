@@ -23,8 +23,33 @@ async function getExerciseCategories() {
   return uniqueMuscles;
 }
 
+async function getExercisesByMuscle(muscle) {
+  const response = await fetch(baseDomain + "/exercises?muscle=" + muscle);
+  const result = await response.json();
+  return result;
+}
+
+async function getExercisesByDifficulty(difficulty) {
+  const response = await fetch(
+    baseDomain + "/exercises?difficulty=" + difficulty
+  );
+  const result = await response.json();
+  return result;
+}
+
+async function getExercisesByFilters(muscle, difficulty) {
+  const response = await fetch(
+    baseDomain + "/exercises?difficulty=" + difficulty + "&muscle=" + muscle
+  );
+  const result = await response.json();
+  return result;
+}
+
 export default {
   getAllExercises,
   getExercisesByWorkoutId,
   getExerciseCategories,
+  getExercisesByMuscle,
+  getExercisesByDifficulty,
+  getExercisesByFilters,
 };
