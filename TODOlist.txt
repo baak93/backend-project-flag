@@ -14,5 +14,5 @@
 
 DÚVIDAS
 
-	1 - Quando estou, por exemplo, no caminho http://localhost:5173/workoutdetail/32 quando clico no exercises sou direcionado para o caminho http://localhost:5173/workoutdetail/Exercises e nao para http://localhost:5173/Exercises. Como posso resolver?
+	1 - Tenho o ExerciseCategories que está dentro da HomeView e quando clico numa categoria ele já um filtro dos exercicios de acordo com a categoria. A searchBar devia funcionar de forma parecida mas como ela ta dentro do ExercisesView eu precisava que ao clicar no botao search a pagina visse um refresh pra poder fazer a busca
 

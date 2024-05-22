@@ -6,13 +6,14 @@ import { useLocation } from "wouter";
 
 function ExercisesView() {
   const [exercises, setExercises] = useState([]);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     (async function () {
       const params = new URLSearchParams(window.location.search);
       const muscle = params.get("muscle");
       const difficulty = params.get("difficulty");
+      const search = params.get("search");
 
       if (muscle && difficulty) {
         const results = await exercisesServerCall.getExercisesByFilters(
@@ -27,6 +28,9 @@ function ExercisesView() {
         const results = await exercisesServerCall.getExercisesByDifficulty(
           difficulty
         );
+        setExercises(results);
+      } else if (search) {
+        const results = await exercisesServerCall.getExercisesBySearch(search);
         setExercises(results);
       } else {
         const results = await exercisesServerCall.getAllExercises();

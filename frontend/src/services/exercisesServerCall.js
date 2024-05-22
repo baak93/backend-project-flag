@@ -45,6 +45,12 @@ async function getExercisesByFilters(muscle, difficulty) {
   return result;
 }
 
+async function getExercisesBySearch(search) {
+  const response = await fetch(baseDomain + "/exercises?search=" + search);
+  const result = await response.json();
+  return result;
+}
+
 export default {
   getAllExercises,
   getExercisesByWorkoutId,
@@ -52,4 +58,5 @@ export default {
   getExercisesByMuscle,
   getExercisesByDifficulty,
   getExercisesByFilters,
+  getExercisesBySearch,
 };

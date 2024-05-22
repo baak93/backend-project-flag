@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { useLocation } from "wouter";
 
 function ExerciseSearchBar() {
   const [search, setSearch] = useState("");
+  const [_, setLocation] = useLocation();
 
   async function handleSearch() {
     if (search) {
-      // const exerciseData = await fetchData();
+      setLocation(`/exercises?search=${search}`);
+      window.location.reload(); //not ideal
     }
   }
 

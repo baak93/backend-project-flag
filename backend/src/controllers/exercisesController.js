@@ -1,7 +1,7 @@
 const exercisesDB = require("../db/exercisesDB");
 
 async function getExercises(req, res) {
-  const { difficulty, muscle } = req.query;
+  const { difficulty, muscle, search } = req.query;
   const workout_id = req.params.id;
 
   try {
@@ -22,6 +22,12 @@ async function getExercises(req, res) {
       res.json(result);
     } else if (difficulty && !muscle) {
       const result = await exercisesDB.getExercisesByDifficulty(difficulty);
+      result.forEach((exercise) => {
+        exercise.image = process.env.DOMAIN + exercise.image;
+      });
+      res.json(result);
+    } else if (search) {
+      const result = await exercisesDB.getExercisesBySearch(search);
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
       });

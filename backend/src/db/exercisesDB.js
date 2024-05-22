@@ -59,6 +59,23 @@ async function getExercisesByFilters(difficulty, muscle) {
   }
 }
 
+async function getExercisesBySearch(search) {
+  const params = [`%${search}%`, `%${search}%`, `%${search}%`];
+
+  try {
+    const [result] = await connection
+      .promise()
+      .query(
+        `SELECT * FROM exercises WHERE NAME LIKE ? OR muscle LIKE ? OR difficulty LIKE ?;`,
+        params
+      );
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("0 exercise found");
+  }
+}
+
 async function getExercisesByWorkoutId(workout_id) {
   const params = [workout_id];
   const query = `SELECT exercises.id, exercises.name, exercises.muscle, exercises.difficulty, exercises.instructions, exercises.image
@@ -129,6 +146,7 @@ module.exports = {
   getExercisesByMuscle,
   getExercisesByDifficulty,
   getExercisesByFilters,
+  getExercisesBySearch,
   getExercisesByWorkoutId,
   getCategories,
   insertExercise,
