@@ -52,13 +52,14 @@ function ExerciseCategories() {
             >
               <CardMedia
                 component="img"
-                image="/img/category-icon2.png"
+                image={`/img/${category}-icon.png`}
+                // image="/img/category-icon2.png"
                 alt={category}
                 sx={{ width: 60, height: 60, marginBottom: "16px" }} // Ajuste o tamanho do ícone conforme necessário
               />
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography variant="h5" component="div">
-                  {category}
+                  {category.toUpperCase()}
                 </Typography>
               </CardContent>
             </Card>
