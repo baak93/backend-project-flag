@@ -18,8 +18,8 @@ function UserMenu() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  useEffect(() => {
-    async function fetchUserData() {
+  useEffect(function () {
+    (async function () {
       try {
         const cookies = await cookiesServerCall.getCookies();
         if (cookies.LoggedIn) {
@@ -29,18 +29,16 @@ function UserMenu() {
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
-    }
-
-    fetchUserData();
+    })();
   }, []);
 
-  const handleOpenUserMenu = (event) => {
+  function handleOpenUserMenu(event) {
     setAnchorElUser(event.currentTarget);
-  };
+  }
 
-  const handleCloseUserMenu = () => {
+  function handleCloseUserMenu() {
     setAnchorElUser(null);
-  };
+  }
 
   return (
     <Box sx={{ flexGrow: 0 }}>

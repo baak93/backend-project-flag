@@ -36,7 +36,21 @@ function deleteWorkout() {}
 
 // function editWorkoutTitle() {}
 
-function addExerciseToWorkout() {}
+async function addExerciseToWorkout(req, res) {
+  const { exerciseID } = req.body;
+  const { workoutID } = req.params;
+  try {
+    const query = `INSERT INTO workouts_exercises (workout_id, exercise_id) VALUES (?, ?)`;
+    const params = [workoutID, exerciseID];
+
+    const result = await connection.promise().query(query, params);
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error creating workout:", error);
+    throw new Error("Something went wrong! Error creating workout.");
+  }
+}
 
 function removeExerciseFromWorkout() {}
 

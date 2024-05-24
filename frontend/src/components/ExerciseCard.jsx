@@ -1,7 +1,8 @@
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, Card, CardActionArea, CardActions, Chip } from "@mui/material";
+import { Card, CardActionArea, CardActions, Chip } from "@mui/material";
+import AddToWorkoutButton from "./AddToWorkoutButton";
 
 export default function ExerciseCard({ exercise }) {
   // Divide os valores do campo muscle em um array
@@ -30,7 +31,6 @@ export default function ExerciseCard({ exercise }) {
           </Typography>
           <Typography variant="body2" color="text.secondary" component="div">
             {exercise.difficulty} -
-            {/* Mapeia sobre os músculos e exibe cada um como uma tag Chip */}
             {muscles.map((muscle, index) => (
               <Chip
                 key={index}
@@ -44,14 +44,7 @@ export default function ExerciseCard({ exercise }) {
         </CardContent>
       </CardActionArea>
       <CardActions style={{ position: "absolute", bottom: 8, right: 8 }}>
-        <Button
-          variant="contained"
-          size="small"
-          color="error"
-          sx={{ backgroundColor: "#ff2625" }}
-        >
-          Add to my routine
-        </Button>
+        <AddToWorkoutButton exercise={exercise} />
       </CardActions>
     </Card>
   );
