@@ -30,7 +30,7 @@ export default function WorkoutCard({ workout }) {
             color="primary"
             onClick={() => {
               window.location.href = `/workoutdetail/${id}`;
-              // Aqui você pode adicionar a lógica para exibir os detalhes do treino
+              //adicionar a lógica para exibir os detalhes do treino
               console.log("Detalhes do treino:", workout);
             }}
           >

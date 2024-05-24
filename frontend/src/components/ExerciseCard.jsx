@@ -2,11 +2,21 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Card, CardActionArea, CardActions, Chip } from "@mui/material";
+import { useLocation } from "wouter";
 import AddToWorkoutButton from "./AddToWorkoutButton";
+import DeleteFromWorkoutButton from "./DeleteFromWorkoutButton";
 
 export default function ExerciseCard({ exercise }) {
-  // Divide os valores do campo muscle em um array
   const muscles = exercise.muscle.split(",").map((muscle) => muscle.trim());
+
+  const [location] = useLocation();
+  let actionButton;
+
+  if (location === "/Exercises") {
+    actionButton = <AddToWorkoutButton exercise={exercise} />;
+  } else if (location.startsWith("/workoutdetail/")) {
+    actionButton = <DeleteFromWorkoutButton exercise={exercise} />;
+  }
 
   return (
     <Card
@@ -44,7 +54,7 @@ export default function ExerciseCard({ exercise }) {
         </CardContent>
       </CardActionArea>
       <CardActions style={{ position: "absolute", bottom: 8, right: 8 }}>
-        <AddToWorkoutButton exercise={exercise} />
+        {actionButton}
       </CardActions>
     </Card>
   );

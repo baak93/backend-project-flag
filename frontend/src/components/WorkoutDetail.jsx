@@ -16,9 +16,6 @@ function WorkoutDetail({ id }) {
     [id]
   );
 
-  console.log("exercises");
-  console.log(exercises);
-
   return (
     <Grid container spacing={2}>
       {exercises.map((exercise, index) => (

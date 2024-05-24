@@ -52,7 +52,20 @@ async function addExerciseToWorkout(req, res) {
   }
 }
 
-function removeExerciseFromWorkout() {}
+async function removeExerciseFromWorkout(req, res) {
+  const { workoutId, exerciseId } = req.params;
+  try {
+    const query = `DELETE FROM workouts_exercises WHERE workout_id = ? AND exercise_id = ?`;
+    const params = [workoutId, exerciseId];
+
+    const result = await connection.promise().query(query, params);
+
+    res.json(result);
+  } catch (error) {
+    console.error("Error removing exercise from workout:", error);
+    res.status(500).json({ error: "Error removing exercise from workout" });
+  }
+}
 
 module.exports = {
   createWorkout,

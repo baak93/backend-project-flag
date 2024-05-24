@@ -20,8 +20,6 @@ async function postExerciseIntoWorkout(workoutID, exerciseID) {
     exerciseID,
   };
 
-  console.log("workoutID", workoutID);
-  console.log("exerciseID", exerciseID);
   const options = {
     method: "POST",
     body: JSON.stringify(body),
@@ -30,8 +28,25 @@ async function postExerciseIntoWorkout(workoutID, exerciseID) {
     },
     credentials: "include",
   };
-  console.log("options", options);
+
   const response = await fetch(baseDomain + `/${workoutID}/exercises`, options);
+  const data = await response.json();
+  return data;
+}
+
+async function deleteExerciseFromWorkout(exerciseID, workoutID) {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+    },
+    credentials: "include",
+  };
+
+  const response = await fetch(
+    `${baseDomain}/${workoutID}/exercises/${exerciseID}`,
+    options
+  );
   const data = await response.json();
   return data;
 }
@@ -46,5 +61,6 @@ async function getWorkoutsByUserId(user_id) {
 export default {
   postWorkout,
   postExerciseIntoWorkout,
+  deleteExerciseFromWorkout,
   getWorkoutsByUserId,
 };

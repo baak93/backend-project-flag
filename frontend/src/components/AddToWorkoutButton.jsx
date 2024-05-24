@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   Dialog,
@@ -43,7 +43,7 @@ function AddToWorkoutButton({ exercise }) {
     setOpen(false);
   }
 
-  async function handleAddRoutine() {
+  async function handleAddToWorkout() {
     if (selectedWorkout) {
       try {
         await workoutsServerCall.postExerciseIntoWorkout(
@@ -103,7 +103,7 @@ function AddToWorkoutButton({ exercise }) {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleAddRoutine} color="primary">
+          <Button onClick={handleAddToWorkout} color="primary">
             Add
           </Button>
         </DialogActions>
