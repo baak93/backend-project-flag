@@ -16,3 +16,5 @@ DÚVIDAS
 
 	1 - Tenho o ExerciseCategories que está dentro da HomeView e quando clico numa categoria ele já um filtro dos exercicios de acordo com a categoria. A searchBar devia funcionar de forma parecida mas como ela ta dentro do ExercisesView eu precisava que ao clicar no botao search a pagina visse um refresh pra poder fazer a busca
 
+
+https://bleatingoat.medium.com/use-wouter-to-detect-query-param-changes-51bdb2c7e993
