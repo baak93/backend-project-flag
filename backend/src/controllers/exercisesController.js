@@ -60,6 +60,9 @@ async function getExerciseCategories(req, res) {
 async function getExerciseById(req, res) {
   const { id } = req.params;
   const result = await exercisesDB.getExerciseById(id);
+  // result[0].forEach((exercise) => {
+  //   exercise.image = process.env.DOMAIN + exercise.image;
+  // });
   res.json(result[0]);
 }
 

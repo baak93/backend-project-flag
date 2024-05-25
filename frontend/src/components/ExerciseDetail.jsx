@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useRoute } from "wouter";
-import workoutServerCall from "../services/workoutsServerCall";
+import exercisesServerCall from "../services/exercisesServerCall";
+import {
+  Container,
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  CircularProgress,
+} from "@mui/material";
 
 function ExerciseDetail() {
   const [match, params] = useRoute("/exercisedetail/:id");
@@ -9,7 +17,9 @@ function ExerciseDetail() {
   useEffect(() => {
     const fetchExerciseDetail = async () => {
       try {
-        const exerciseData = await workoutServerCall.getExerciseById(params.id);
+        const exerciseData = await exercisesServerCall.getExerciseById(
+          params.id
+        );
         setExercise(exerciseData);
       } catch (error) {
         console.error("Error fetching exercise detail:", error);
@@ -20,19 +30,52 @@ function ExerciseDetail() {
   }, [params.id]);
 
   if (!exercise) {
-    return <div>Loading...</div>;
+    return (
+      <Container>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+        >
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
   }
 
-  console.log("exercise", exercise.image);
+  console.log("image url", exercise.image); //falta adicionar http://localhost:3000, mas quando adiciono dá erro de CORS
 
   return (
-    <div>
-      <h1>{exercise.name}</h1>
-      <img src={exercise.image} alt={exercise.name} />
-      <p>Difficulty: {exercise.difficulty}</p>
-      <p>Muscles: {exercise.muscle}</p>
-      <p>Instructions: {exercise.instructions}</p>
-    </div>
+    <Container>
+      <Box mt={4} display="flex" flexDirection="column" alignItems="center">
+        <Typography variant="h3" component="h1" gutterBottom>
+          {exercise.name}
+        </Typography>
+        <Card sx={{ maxWidth: 600, width: "100%" }}>
+          <CardMedia
+            component="img"
+            image={exercise.image}
+            alt={exercise.name}
+            sx={{ height: 400, objectFit: "contain" }}
+          />
+          <Box p={2}>
+            <Typography variant="h6" component="p" gutterBottom>
+              Difficulty: {exercise.difficulty}
+            </Typography>
+            <Typography variant="h6" component="p" gutterBottom>
+              Muscles: {exercise.muscle}
+            </Typography>
+            <Typography variant="h6" component="p" gutterBottom>
+              Instructions:
+            </Typography>
+            <Typography variant="body1" component="p">
+              {exercise.instructions}
+            </Typography>
+          </Box>
+        </Card>
+      </Box>
+    </Container>
   );
 }
 

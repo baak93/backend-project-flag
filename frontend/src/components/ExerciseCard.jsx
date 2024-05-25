@@ -21,8 +21,6 @@ export default function ExerciseCard({ exercise }) {
     setLocation(`/exercisedetail/${exercise.id}`);
   };
 
-  console.log("location", location);
-
   return (
     <Card
       sx={{

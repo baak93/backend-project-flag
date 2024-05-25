@@ -1,11 +1,5 @@
 const baseDomain = "http://localhost:3000";
 
-async function getExerciseById(exerciseID) {
-  const response = await fetch(`${baseDomain}/exercises/${exerciseID}`);
-  const result = await response.json();
-  return result;
-}
-
 async function postWorkout(workoutData) {
   const options = {
     method: "POST",
@@ -65,7 +59,6 @@ async function getWorkoutsByUserId(user_id) {
 }
 
 export default {
-  getExerciseById,
   postWorkout,
   postExerciseIntoWorkout,
   deleteExerciseFromWorkout,
