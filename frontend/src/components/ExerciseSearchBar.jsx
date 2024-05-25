@@ -13,6 +13,12 @@ function ExerciseSearchBar() {
     }
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
+
   return (
     <>
       <Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
@@ -35,6 +41,7 @@ function ExerciseSearchBar() {
             }}
             value={search}
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            onKeyDown={handleKeyDown}
             placeholder="Search Exercises"
             type="text"
           />
