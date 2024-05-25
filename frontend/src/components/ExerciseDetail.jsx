@@ -44,8 +44,6 @@ function ExerciseDetail() {
     );
   }
 
-  console.log("image url", exercise.image); //falta adicionar http://localhost:3000, mas quando adiciono dá erro de CORS
-
   return (
     <Container>
       <Box mt={4} display="flex" flexDirection="column" alignItems="center">

@@ -1,10 +1,10 @@
-	Create and add exercises to a workout
-	Create delete exercise button
-	Create exercise details
+	Create and add exercises to a workout (50%)
+	Create delete exercise button (ok)
+	Create exercise details(80%)
 	Logout -> delete cookies
 	maxage para dar validade às cookies
 	Edit workout title
-	Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn)
+	Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn) (80%)
 	Edit password 
 	Validade email
 	Secçao antes do footer
