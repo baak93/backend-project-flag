@@ -115,11 +115,11 @@ async function getCategories() {
   }
 }
 
-async function insertExercise(name, muscle, difficulty, instructions) {
-  const params = [name, muscle, difficulty, instructions];
+async function insertExercise(name, muscle, difficulty, image, instructions) {
+  const params = [name, muscle, difficulty, image, instructions];
 
   try {
-    const query = `INSERT INTO exercises (name, muscle, difficulty, instructions) VALUES(?, ?, ?, ?)`;
+    const query = `INSERT INTO exercises (name, muscle, difficulty, image, instructions) VALUES(?, ?, ?, ?, ?)`;
     const result = await connection.promise().query(query, params);
 
     return result;

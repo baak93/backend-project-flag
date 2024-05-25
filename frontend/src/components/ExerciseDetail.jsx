@@ -27,7 +27,7 @@ function ExerciseDetail() {
     };
 
     fetchExerciseDetail();
-  }, [params.id]);
+  }, [params?.id]); //solução temporária (ao fazer back do "/exercisedetail/:id" para outra página, é feito novo fetch e o params é null e crasha sem o ternário)
 
   if (!exercise) {
     return (

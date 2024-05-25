@@ -29,7 +29,6 @@ export default function ExerciseCard({ exercise }) {
         minHeight: 400,
         position: "relative",
       }}
-      onClick={handleClick}
     >
       <CardActionArea>
         <CardMedia
@@ -38,6 +37,7 @@ export default function ExerciseCard({ exercise }) {
           image={exercise.image}
           alt={exercise.name}
           style={{ objectFit: "contain" }}
+          onClick={handleClick}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

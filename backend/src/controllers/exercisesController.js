@@ -66,7 +66,7 @@ async function getExerciseById(req, res) {
 }
 
 async function postExercise(req, res) {
-  const { name, muscle, difficulty, instructions } = req.body;
+  const { name, muscle, difficulty, image, instructions } = req.body;
   // TODO: add validation
 
   try {
@@ -74,6 +74,7 @@ async function postExercise(req, res) {
       name,
       muscle,
       difficulty,
+      image,
       instructions
     );
 
