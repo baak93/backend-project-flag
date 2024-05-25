@@ -12,6 +12,20 @@ async function getAllExercises() {
   }
 }
 
+async function getExerciseById(id) {
+  const params = [id];
+
+  try {
+    const [result] = await connection
+      .promise()
+      .query(`SELECT * FROM exercises WHERE id = ?`, params);
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Something went wrong! Couldn't get the exercise.");
+  }
+}
+
 async function getExercisesByMuscle(muscle) {
   const params = [`%${muscle}%`];
 
@@ -143,6 +157,7 @@ async function deleteExercise(id = "") {
 
 module.exports = {
   getAllExercises,
+  getExerciseById,
   getExercisesByMuscle,
   getExercisesByDifficulty,
   getExercisesByFilters,

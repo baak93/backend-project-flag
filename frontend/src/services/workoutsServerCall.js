@@ -1,5 +1,11 @@
 const baseDomain = "http://localhost:3000";
 
+async function getExerciseById(exerciseID) {
+  const response = await fetch(`${baseDomain}/exercises/${exerciseID}`);
+  const result = await response.json();
+  return result;
+}
+
 async function postWorkout(workoutData) {
   const options = {
     method: "POST",
@@ -10,9 +16,9 @@ async function postWorkout(workoutData) {
     credentials: "include",
   };
 
-  const response = await fetch(baseDomain + "/workouts", options);
-  const data = await response.json();
-  return data;
+  const response = await fetch(`${baseDomain}/workouts`, options);
+  const result = await response.json();
+  return result;
 }
 
 async function postExerciseIntoWorkout(workoutID, exerciseID) {
@@ -29,9 +35,9 @@ async function postExerciseIntoWorkout(workoutID, exerciseID) {
     credentials: "include",
   };
 
-  const response = await fetch(baseDomain + `/${workoutID}/exercises`, options);
-  const data = await response.json();
-  return data;
+  const response = await fetch(`${baseDomain}/${workoutID}/exercises`, options);
+  const result = await response.json();
+  return result;
 }
 
 async function deleteExerciseFromWorkout(exerciseID, workoutID) {
@@ -47,18 +53,19 @@ async function deleteExerciseFromWorkout(exerciseID, workoutID) {
     `${baseDomain}/${workoutID}/exercises/${exerciseID}`,
     options
   );
-  const data = await response.json();
-  return data;
+  const result = await response.json();
+  return result;
 }
 
 async function getWorkoutsByUserId(user_id) {
-  const response = await fetch(baseDomain + "/workouts/" + user_id);
-  const data = await response.json();
+  const response = await fetch(`${baseDomain}/workouts/${user_id}`);
+  const result = await response.json();
 
-  return data[0];
+  return result[0];
 }
 
 export default {
+  getExerciseById,
   postWorkout,
   postExerciseIntoWorkout,
   deleteExerciseFromWorkout,

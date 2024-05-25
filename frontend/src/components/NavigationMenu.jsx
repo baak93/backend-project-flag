@@ -62,7 +62,7 @@ function NavigationMenu() {
               key={index}
               onClick={handleCloseNavMenu}
               component={Link}
-              href={`/${page}`}
+              href={`/${page.toLowerCase()}`}
             >
               <Typography textAlign="center">{page}</Typography>
             </MenuItem>
@@ -76,7 +76,7 @@ function NavigationMenu() {
             onClick={handleCloseNavMenu}
             sx={{ my: 2, color: "#fff", display: "block" }}
             component={Link}
-            href={`/${page}`}
+            href={`/${page.toLowerCase()}`}
           >
             <span style={{ fontWeight: 600 }}>{page}</span>
           </Button>
