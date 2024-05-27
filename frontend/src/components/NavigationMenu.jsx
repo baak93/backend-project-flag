@@ -57,9 +57,10 @@ function NavigationMenu() {
           {pages.map((page, index) => (
             <MenuItem
               key={index}
-              onClick={handleCloseNavMenu}
-              component={Link}
-              href={`/${page.toLowerCase()}`}
+              onClick={() => {
+                handleCloseNavMenu();
+                window.location.href = `/${page.toLowerCase()}`;
+              }}
             >
               <Typography textAlign="center">{page}</Typography>
             </MenuItem>
@@ -70,10 +71,20 @@ function NavigationMenu() {
         {pages.map((page, index) => (
           <Button
             key={index}
-            onClick={handleCloseNavMenu}
-            sx={{ my: 2, color: "#fff", display: "block" }}
-            component={Link}
-            href={`/${page.toLowerCase()}`}
+            onClick={() => {
+              window.location.href = `/${page.toLowerCase()}`;
+            }}
+            // sx={{ my: 2, color: "#fff", display: "block" }}
+            sx={{
+              my: 2,
+              color: "#fff",
+              display: "block",
+              backgroundColor: "#ff2625",
+              "&:hover": {
+                color: "#ff2625",
+                backgroundColor: "#fff",
+              },
+            }}
           >
             <span style={{ fontWeight: 600 }}>{page}</span>
           </Button>
