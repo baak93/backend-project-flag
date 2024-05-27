@@ -4,7 +4,7 @@ import exercisesServerCall from "../services/exercisesServerCall";
 import ExerciseCard from "./ExerciseCard";
 import { useLocation } from "wouter";
 
-function ExercisesView() {
+function ExercisesList() {
   const [exercises, setExercises] = useState([]);
   const [location, setLocation] = useLocation();
 
@@ -14,26 +14,43 @@ function ExercisesView() {
       const muscle = params.get("muscle");
       const difficulty = params.get("difficulty");
       const search = params.get("search");
+      const limit = params.get("limit");
+      const offset = params.get("offset");
 
       if (muscle && difficulty) {
         const results = await exercisesServerCall.getExercisesByFilters(
           muscle,
-          difficulty
+          difficulty,
+          limit,
+          offset
         );
         setExercises(results);
       } else if (muscle) {
-        const results = await exercisesServerCall.getExercisesByMuscle(muscle);
+        const results = await exercisesServerCall.getExercisesByMuscle(
+          muscle,
+          limit,
+          offset
+        );
         setExercises(results);
       } else if (difficulty) {
         const results = await exercisesServerCall.getExercisesByDifficulty(
-          difficulty
+          difficulty,
+          limit,
+          offset
         );
         setExercises(results);
       } else if (search) {
-        const results = await exercisesServerCall.getExercisesBySearch(search);
+        const results = await exercisesServerCall.getExercisesBySearch(
+          search,
+          limit,
+          offset
+        );
         setExercises(results);
       } else {
-        const results = await exercisesServerCall.getAllExercises();
+        const results = await exercisesServerCall.getAllExercises(
+          limit,
+          offset
+        );
         setExercises(results);
       }
     })();
@@ -52,4 +69,4 @@ function ExercisesView() {
   );
 }
 
-export default ExercisesView;
+export default ExercisesList;

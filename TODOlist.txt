@@ -1,5 +1,5 @@
-	Create and add exercises to a workout (50%)
-	Create delete exercise button (ok)
+	Create and add exercises to a workout (50%, loading issue)
+	Create delete exercise button (ok, loading issue)
 	Create exercise details(80%)
 	Logout -> delete cookies
 	maxage para dar validade às cookies
@@ -20,3 +20,6 @@ DÚVIDAS
 
 
 https://bleatingoat.medium.com/use-wouter-to-detect-query-param-changes-51bdb2c7e993
+
+
+

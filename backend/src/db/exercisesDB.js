@@ -1,10 +1,11 @@
 const connection = require("./connection");
 
-async function getAllExercises() {
+async function getAllExercises(limit = 12, offset = 0) {
+  const params = [limit, offset];
+  const query = `SELECT * FROM exercises LIMIT ? OFFSET ?`;
+
   try {
-    const [result] = await connection
-      .promise()
-      .query(`SELECT * FROM exercises`);
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -14,11 +15,10 @@ async function getAllExercises() {
 
 async function getExerciseById(id) {
   const params = [id];
+  const query = `SELECT * FROM exercises WHERE id = ?`;
 
   try {
-    const [result] = await connection
-      .promise()
-      .query(`SELECT * FROM exercises WHERE id = ?`, params);
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -26,13 +26,12 @@ async function getExerciseById(id) {
   }
 }
 
-async function getExercisesByMuscle(muscle) {
-  const params = [`%${muscle}%`];
+async function getExercisesByMuscle(muscle, limit = 12, offset = 0) {
+  const params = [`%${muscle}%`, limit, offset];
+  const query = `SELECT * FROM exercises WHERE muscle LIKE ? LIMIT ? OFFSET ?`;
 
   try {
-    const [result] = await connection
-      .promise()
-      .query(`SELECT * FROM exercises WHERE muscle LIKE ?`, params);
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -40,13 +39,12 @@ async function getExercisesByMuscle(muscle) {
   }
 }
 
-async function getExercisesByDifficulty(difficulty) {
-  const [params] = [difficulty];
+async function getExercisesByDifficulty(difficulty, limit = 12, offset = 0) {
+  const params = [difficulty, limit, offset];
+  const query = `SELECT * FROM exercises WHERE difficulty = ? LIMIT ? OFFSET ?`;
 
   try {
-    const [result] = await connection
-      .promise()
-      .query(`SELECT * FROM exercises WHERE difficulty = ?`, params);
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -54,16 +52,17 @@ async function getExercisesByDifficulty(difficulty) {
   }
 }
 
-async function getExercisesByFilters(difficulty, muscle) {
-  const params = [difficulty, `%${muscle}%`];
+async function getExercisesByFilters(
+  difficulty,
+  muscle,
+  limit = 12,
+  offset = 0
+) {
+  const params = [difficulty, `%${muscle}%`, limit, offset];
+  const query = `SELECT * FROM exercises WHERE difficulty = ? AND muscle LIKE ? LIMIT ? OFFSET ?`;
 
   try {
-    const [result] = await connection
-      .promise()
-      .query(
-        `SELECT * FROM exercises WHERE difficulty = ? AND muscle LIKE ?`,
-        params
-      );
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -73,16 +72,12 @@ async function getExercisesByFilters(difficulty, muscle) {
   }
 }
 
-async function getExercisesBySearch(search) {
-  const params = [`%${search}%`, `%${search}%`, `%${search}%`];
+async function getExercisesBySearch(search, limit = 12, offset = 0) {
+  const params = [`%${search}%`, `%${search}%`, `%${search}%`, limit, offset];
+  const query = `SELECT * FROM exercises WHERE NAME LIKE ? OR muscle LIKE ? OR difficulty LIKE ? LIMIT ? OFFSET ?`;
 
   try {
-    const [result] = await connection
-      .promise()
-      .query(
-        `SELECT * FROM exercises WHERE NAME LIKE ? OR muscle LIKE ? OR difficulty LIKE ?;`,
-        params
-      );
+    const [result] = await connection.promise().query(query, params);
     return result;
   } catch (error) {
     console.log(error);
@@ -104,9 +99,8 @@ async function getExercisesByWorkoutId(workout_id) {
 
 async function getCategories() {
   try {
-    const [result] = await connection
-      .promise()
-      .query(`SELECT muscle FROM exercises`);
+    const query = `SELECT muscle FROM exercises`;
+    const [result] = await connection.promise().query(query);
 
     return result;
   } catch (error) {

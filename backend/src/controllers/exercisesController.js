@@ -3,31 +3,47 @@ const exercisesDB = require("../db/exercisesDB");
 async function getExercises(req, res) {
   const { difficulty, muscle, search } = req.query;
   const workout_id = req.params.id;
+  const limit = parseInt(req.query.limit, 10) || 12;
+  const offset = parseInt(req.query.offset, 10) || 0;
 
   try {
     if (difficulty && muscle) {
       const result = await exercisesDB.getExercisesByFilters(
         difficulty,
-        muscle
+        muscle,
+        limit,
+        offset
       );
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
       });
       res.json(result);
     } else if (!difficulty && muscle) {
-      const result = await exercisesDB.getExercisesByMuscle(muscle);
+      const result = await exercisesDB.getExercisesByMuscle(
+        muscle,
+        limit,
+        offset
+      );
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
       });
       res.json(result);
     } else if (difficulty && !muscle) {
-      const result = await exercisesDB.getExercisesByDifficulty(difficulty);
+      const result = await exercisesDB.getExercisesByDifficulty(
+        difficulty,
+        limit,
+        offset
+      );
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
       });
       res.json(result);
     } else if (search) {
-      const result = await exercisesDB.getExercisesBySearch(search);
+      const result = await exercisesDB.getExercisesBySearch(
+        search,
+        limit,
+        offset
+      );
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
       });
@@ -40,10 +56,10 @@ async function getExercises(req, res) {
       });
       res.json(result);
     } else {
-      const result = await exercisesDB.getAllExercises();
+      const result = await exercisesDB.getAllExercises(limit, offset);
       result.forEach((exercise) => {
         exercise.image = process.env.DOMAIN + exercise.image;
-      }); //lê o url da variavel de ambiente e concatena com o caminho da imagem da base de dados
+      });
       res.json(result);
     }
   } catch (error) {

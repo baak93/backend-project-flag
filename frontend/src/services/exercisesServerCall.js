@@ -1,10 +1,13 @@
 const baseDomain = "http://localhost:3000";
 
-async function getAllExercises() {
+async function getAllExercises(limit, offset) {
   const options = {
     credentials: "include",
   };
-  const response = await fetch(baseDomain + "/exercises", options);
+  const response = await fetch(
+    `${baseDomain}/exercises?limit=${limit}&offset=${offset}`,
+    options
+  );
   const result = await response.json();
   return result;
 }
@@ -29,30 +32,34 @@ async function getExerciseCategories() {
   return uniqueMuscles;
 }
 
-async function getExercisesByMuscle(muscle) {
-  const response = await fetch(baseDomain + "/exercises?muscle=" + muscle);
-  const result = await response.json();
-  return result;
-}
-
-async function getExercisesByDifficulty(difficulty) {
+async function getExercisesByMuscle(muscle, limit, offset) {
   const response = await fetch(
-    baseDomain + "/exercises?difficulty=" + difficulty
+    `${baseDomain}/exercises?muscle=${muscle}&limit=${limit}&offset=${offset}`
   );
   const result = await response.json();
   return result;
 }
 
-async function getExercisesByFilters(muscle, difficulty) {
+async function getExercisesByDifficulty(difficulty, limit, offset) {
   const response = await fetch(
-    baseDomain + "/exercises?difficulty=" + difficulty + "&muscle=" + muscle
+    `${baseDomain}/exercises?difficulty=${difficulty}&limit=${limit}&offset=${offset}`
   );
   const result = await response.json();
   return result;
 }
 
-async function getExercisesBySearch(search) {
-  const response = await fetch(baseDomain + "/exercises?search=" + search);
+async function getExercisesByFilters(muscle, difficulty, limit, offset) {
+  const response = await fetch(
+    `${baseDomain}/exercises?difficulty=${difficulty}&muscle=${muscle}&limit=${limit}&offset=${offset}`
+  );
+  const result = await response.json();
+  return result;
+}
+
+async function getExercisesBySearch(search, limit, offset) {
+  const response = await fetch(
+    `${baseDomain}/exercises?search=${search}&limit=${limit}&offset=${offset}`
+  );
   const result = await response.json();
   return result;
 }
