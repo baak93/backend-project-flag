@@ -20,11 +20,11 @@ function RegisterForm() {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarVariant, setSnackbarVariant] = useState("success"); // Nova variável para controlar a cor da Snackbar
 
-  const handleSnackbarClose = () => {
+  function handleSnackbarClose() {
     setSnackbarOpen(false);
-  };
+  }
 
-  const handleSubmit = async (event) => {
+  async function handleSubmit(event) {
     event.preventDefault();
     const result = await usersServerCall.registerUser(
       username,
@@ -41,7 +41,7 @@ function RegisterForm() {
       setSnackbarMessage("User registered successfully");
     }
     setSnackbarOpen(true);
-  };
+  }
 
   return (
     <>

@@ -17,9 +17,9 @@ export default function ExerciseCard({ exercise }) {
     actionButton = <DeleteFromWorkoutButton exercise={exercise} />;
   }
 
-  const handleClick = () => {
+  function handleClick() {
     setLocation(`/exercisedetail/${exercise.id}`);
-  };
+  }
 
   return (
     <Card

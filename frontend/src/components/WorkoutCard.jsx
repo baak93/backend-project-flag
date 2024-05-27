@@ -27,7 +27,13 @@ export default function WorkoutCard({ workout }) {
           <Button
             variant="contained"
             size="small"
-            color="primary"
+            color="error"
+            sx={{
+              backgroundColor: "#686D76",
+              "&:hover": {
+                backgroundColor: "#ff2625",
+              },
+            }}
             onClick={() => {
               window.location.href = `/workoutdetail/${id}`;
               //adicionar a lógica para exibir os detalhes do treino

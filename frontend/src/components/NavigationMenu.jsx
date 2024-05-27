@@ -7,10 +7,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import {
-  Menu as MenuIcon,
-  FitnessCenter as FitnessCenterIcon,
-} from "@mui/icons-material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { Link } from "wouter";
 
 const pages = ["Exercises", "Workouts", "Contacts"];

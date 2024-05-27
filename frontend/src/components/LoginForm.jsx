@@ -9,9 +9,9 @@ function LoginForm() {
   const [message, setMessage] = useState("");
   const [variant, setVariant] = useState("success");
 
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
-  };
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
