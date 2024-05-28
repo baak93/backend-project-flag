@@ -32,9 +32,22 @@ async function getWorkoutsByUserId(req, res) {
   res.json(workoutsResult);
 }
 
-function deleteWorkout() {}
-
 // function editWorkoutTitle() {}
+
+async function deleteWorkoutById(req, res) {
+  const workoutId = req.params.id;
+  try {
+    const queryCleanWorkout = `DELETE FROM workouts_exercises WHERE workout_id = ?`;
+    const queryDeleteWorkout = `DELETE FROM workouts WHERE id = ?`;
+    const params = [workoutId];
+    await connection.promise().query(queryCleanWorkout, params);
+    await connection.promise().query(queryDeleteWorkout, params);
+    res.status(204).end(); // Retorna 204 No Content se o treino for excluído com sucesso
+  } catch (error) {
+    console.error("Error deleting workout:", error);
+    res.status(500).json({ error: "Error deleting workout" });
+  }
+}
 
 async function addExerciseToWorkout(req, res) {
   const { exerciseID } = req.body;
@@ -70,7 +83,7 @@ async function removeExerciseFromWorkout(req, res) {
 module.exports = {
   createWorkout,
   getWorkoutsByUserId,
-  deleteWorkout,
+  deleteWorkoutById,
   addExerciseToWorkout,
   removeExerciseFromWorkout,
   // editWorkoutTitle

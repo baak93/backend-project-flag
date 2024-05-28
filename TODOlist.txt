@@ -1,7 +1,7 @@
 	Create and add exercises to a workout (50%, loading issue)
 	Create delete exercise button (ok, loading issue)
 	Create exercise details(80%)
-	Logout -> delete cookies
+	Delete WorkoutCard
 	maxage para dar validade às cookies
 	Edit workout title
 	Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn) (80%)
@@ -9,14 +9,16 @@
 	Validade email
 	Secçao antes do footer
 	Footer
+	Profile Page
 	Page not found
 
 	ok - Create workout page
 	ok - Create detail exercise page
-
+	ok - Logout -> delete cookies 
+	
 DÚVIDAS
 
-	1 - Tenho o ExerciseCategories que está dentro da HomeView e quando clico numa categoria ele já um filtro dos exercicios de acordo com a categoria. A searchBar devia funcionar de forma parecida mas como ela ta dentro do ExercisesView eu precisava que ao clicar no botao search a pagina visse um refresh pra poder fazer a busca
+
 
 
 https://bleatingoat.medium.com/use-wouter-to-detect-query-param-changes-51bdb2c7e993
