@@ -40,6 +40,26 @@ function UserMenu() {
     setAnchorElUser(null);
   }
 
+  async function logout() {
+    try {
+      await cookiesServerCall.logout();
+      setLoggedIn(false);
+      setUserData(null);
+      window.location.href = "/"; // Redirect to home or login page
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  }
+
+  function handleMenuItemClick(setting) {
+    if (setting === "Logout") {
+      logout();
+    } else {
+      handleCloseUserMenu();
+      // Implement other settings actions here, if necessary
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 0 }}>
       {loggedIn ? (
@@ -71,7 +91,10 @@ function UserMenu() {
             onClose={handleCloseUserMenu}
           >
             {settings.map((setting) => (
-              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+              <MenuItem
+                key={setting}
+                onClick={() => handleMenuItemClick(setting)}
+              >
                 <Typography textAlign="center">{setting}</Typography>
               </MenuItem>
             ))}
@@ -82,7 +105,7 @@ function UserMenu() {
           <Button
             href="/sign-in"
             variant="contained"
-            size="meddium"
+            size="medium"
             style={{ textDecoration: "none", backgroundColor: "#fff" }}
           >
             <span

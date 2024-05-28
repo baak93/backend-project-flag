@@ -10,6 +10,18 @@ async function getCookies() {
   return result;
 }
 
+async function logout() {
+  const options = {
+    method: "DELETE",
+    credentials: "include",
+  };
+  const response = await fetch(baseDomain + "/cookies", options);
+  const result = await response.json();
+
+  return result;
+}
+
 export default {
   getCookies,
+  logout,
 };

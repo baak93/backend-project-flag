@@ -15,5 +15,6 @@ router.delete(
 router.get("/workouts/:id", workoutsController.getWorkoutsByUserId);
 router.get("/workoutdetail/:id", exercisesController.getExercises);
 router.get("/cookies", cookiesController.getCookies);
+router.delete("/cookies", cookiesController.logout);
 
 module.exports = router;
