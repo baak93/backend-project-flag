@@ -106,7 +106,12 @@ function WorkoutForm() {
           value={title}
           onChange={handleTitleChange}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          type="submit"
+          variant="contained"
+          color="error"
+          sx={{ backgroundColor: "#ff2625" }}
+        >
           Create Workout
         </Button>
       </Box>

@@ -8,6 +8,7 @@ import {
   Select,
   FormControl,
   InputLabel,
+  Container,
 } from "@mui/material";
 import exercisesServerCall from "../services/exercisesServerCall";
 import ExerciseCard from "./ExerciseCard";
@@ -96,9 +97,9 @@ function ExercisesList() {
   };
 
   return (
-    <Box sx={{ padding: "16px" }}>
-      <FormControl sx={{ mb: 2 }}>
-        <InputLabel>Exercícios por página</InputLabel>
+    <Container maxWidth="lg" sx={{ mt: 5 }}>
+      <FormControl sx={{ mb: 2, width: 150 }}>
+        <InputLabel>Exercises per page</InputLabel>
         <Select
           value={limit}
           onChange={handleLimitChange}
@@ -110,6 +111,7 @@ function ExercisesList() {
           <MenuItem value={48}>48</MenuItem>
         </Select>
       </FormControl>
+
       <Grid container spacing={3} justifyContent="center">
         {exercises.map((exercise, index) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
@@ -146,7 +148,7 @@ function ExercisesList() {
           Next
         </Button>
       </Stack>
-    </Box>
+    </Container>
   );
 }
 
