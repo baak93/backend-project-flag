@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Button,
   Dialog,
@@ -7,28 +7,21 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useLocation } from "wouter";
 import workoutServerCall from "../services/workoutsServerCall";
 
-function DeleteExerciseFromWorkoutButton({ exercise }) {
-  const [location] = useLocation();
-  const [workoutID, setWorkoutID] = useState(null);
+function DeleteExerciseFromWorkoutButton({ exercise, onRemove, workoutId }) {
   const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    const workoutIdFromUrl = location.split("/").pop();
-    setWorkoutID(workoutIdFromUrl);
-  }, [location]);
-
   async function handleDeleteExercise() {
-    if (workoutID) {
+    if (workoutId) {
       try {
         await workoutServerCall.deleteExerciseFromWorkout(
           exercise.id,
-          workoutID
+          workoutId
         );
-        console.log("Exercício removido do workout:", workoutID);
+        console.log("Exercício removido do workout:", workoutId);
         setOpen(false); // Fecha o diálogo após a remoção
+        onRemove(exercise.id); // Chama a função de remoção passada como prop
       } catch (error) {
         console.error("Erro ao remover exercício do workout", error);
       }

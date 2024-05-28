@@ -24,6 +24,13 @@ function WorkoutDetail({ id }) {
     fetchWorkoutDetails();
   }, [id]);
 
+  const removeExercise = (exerciseIdToRemove) => {
+    const updatedExercises = exercises.filter(
+      (exercise) => exercise.id !== exerciseIdToRemove
+    );
+    setExercises(updatedExercises);
+  };
+
   return (
     <Container maxWidth="lg" sx={{ mt: 5 }}>
       <Box
@@ -40,7 +47,11 @@ function WorkoutDetail({ id }) {
       <Grid container spacing={3} justifyContent="center">
         {exercises.map((exercise, index) => (
           <Grid item key={index} xs={12} sm={6} md={4} lg={3}>
-            <ExerciseCard exercise={exercise} />
+            <ExerciseCard
+              exercise={exercise}
+              onRemove={removeExercise}
+              workoutId={id}
+            />
           </Grid>
         ))}
       </Grid>

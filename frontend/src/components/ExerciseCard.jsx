@@ -6,7 +6,7 @@ import { Card, CardActionArea, CardActions, Chip } from "@mui/material";
 import AddToWorkoutButton from "./AddToWorkoutButton";
 import DeleteFromWorkoutButton from "./DeleteFromWorkoutButton";
 
-export default function ExerciseCard({ exercise }) {
+export default function ExerciseCard({ exercise, onRemove, workoutId }) {
   const muscles = exercise.muscle.split(",").map((muscle) => muscle.trim());
   const [location, setLocation] = useLocation();
   let actionButton;
@@ -14,7 +14,13 @@ export default function ExerciseCard({ exercise }) {
   if (location === "/exercises") {
     actionButton = <AddToWorkoutButton exercise={exercise} />;
   } else if (location.startsWith("/workoutdetail/")) {
-    actionButton = <DeleteFromWorkoutButton exercise={exercise} />;
+    actionButton = (
+      <DeleteFromWorkoutButton
+        exercise={exercise}
+        onRemove={onRemove}
+        workoutId={workoutId}
+      />
+    );
   }
 
   function handleClick() {
