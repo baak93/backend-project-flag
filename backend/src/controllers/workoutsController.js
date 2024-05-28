@@ -22,17 +22,28 @@ async function createWorkout(req, res) {
 }
 
 async function getWorkoutsByUserId(req, res) {
-  const user_id = req.params.id;
+  const { userId } = req.params;
 
   const query = `SELECT * FROM workouts WHERE user_id = ?`;
-  const params = [user_id];
+  const params = [userId];
 
   const workoutsResult = await connection.promise().query(query, params);
-  console.log(workoutsResult);
+
   res.json(workoutsResult);
 }
 
 // function editWorkoutTitle() {}
+
+async function getWorkoutById(req, res) {
+  const { workoutId } = req.params;
+
+  const query = `SELECT * FROM workouts WHERE id = ?`;
+  const params = workoutId;
+
+  const workoutsResult = await connection.promise().query(query, params);
+
+  res.json(workoutsResult[0]);
+}
 
 async function deleteWorkoutById(req, res) {
   const workoutId = req.params.id;
@@ -82,6 +93,7 @@ async function removeExerciseFromWorkout(req, res) {
 
 module.exports = {
   createWorkout,
+  getWorkoutById,
   getWorkoutsByUserId,
   deleteWorkoutById,
   addExerciseToWorkout,

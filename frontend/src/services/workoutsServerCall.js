@@ -27,10 +27,8 @@ async function deleteWorkoutById(id) {
   const response = await fetch(`${baseDomain}/workout/${id}`, options);
 
   if (response.ok) {
-    // Se a solicitação foi bem-sucedida e o status é 200-299, retorna vazio
     return;
   } else {
-    // Se houve um erro, lança uma exceção com a mensagem de erro
     const errorData = await response.json();
     throw new Error(errorData.error || "Error deleting workout");
   }
@@ -79,10 +77,18 @@ async function getWorkoutsByUserId(user_id) {
   return result[0];
 }
 
+async function getWorkoutById(workoutId) {
+  const response = await fetch(`${baseDomain}/workout/${workoutId}`);
+  const result = await response.json();
+
+  return result[0];
+}
+
 export default {
   postWorkout,
   deleteWorkoutById,
   postExerciseIntoWorkout,
   deleteExerciseFromWorkout,
   getWorkoutsByUserId,
+  getWorkoutById,
 };

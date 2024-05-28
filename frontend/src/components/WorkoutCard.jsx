@@ -24,7 +24,7 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
 }));
 
-function WorkoutCard({ workout, onDelete }) {
+function WorkoutCard({ workout }) {
   const { id, title } = workout;
 
   const [openDialog, setOpenDialog] = useState(false);

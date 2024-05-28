@@ -12,7 +12,8 @@ router.delete(
   "/:workoutId/exercises/:exerciseId",
   workoutsController.removeExerciseFromWorkout
 );
-router.get("/workouts/:id", workoutsController.getWorkoutsByUserId); //alterar:id para :userId
+router.get("/workouts/:userId", workoutsController.getWorkoutsByUserId); //alterar:id para :userId
+router.get("/workout/:workoutId", workoutsController.getWorkoutById);
 router.delete("/workout/:id", workoutsController.deleteWorkoutById);
 router.get("/workoutdetail/:id", exercisesController.getExercises);
 router.get("/cookies", cookiesController.getCookies);
