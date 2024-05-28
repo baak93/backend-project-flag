@@ -9,6 +9,7 @@ import WorkoutView from "./views/WorkoutView";
 import WorkoutDetail from "./components/WorkoutDetail";
 import ExercisesView from "./views/ExercisesView";
 import ExerciseDetail from "./components/ExerciseDetail";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/sign-up" component={RegisterForm} />
         <Route path="/sign-in" component={LoginForm} />
       </Switch>
+      <Footer />
     </>
   );
 }
