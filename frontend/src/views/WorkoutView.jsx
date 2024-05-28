@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Container, Box } from "@mui/material";
 import WorkoutCard from "../components/WorkoutCard";
 import cookiesServerCall from "../services/cookiesServerCall";
 import workoutServerCall from "../services/workoutsServerCall";
@@ -33,23 +33,23 @@ function WorkoutView() {
   }
 
   return (
-    <>
-      <Grid container spacing={2}>
+    <Container maxWidth="lg" sx={{ mt: 5 }}>
+      <Grid container spacing={3} justifyContent="center">
         {workouts.map((workout) => (
           <WorkoutCard key={workout.id} workout={workout} />
         ))}
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <Button
-            variant="contained"
-            color="error"
-            sx={{ backgroundColor: "#ff2625" }}
-            onClick={createWorkout}
-          >
-            Create a new workout
-          </Button>
-        </Grid>
       </Grid>
-    </>
+      <Box sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
+        <Button
+          variant="contained"
+          color="error"
+          sx={{ backgroundColor: "#ff2625", mb: 2 }}
+          onClick={createWorkout}
+        >
+          Create a new workout
+        </Button>
+      </Box>
+    </Container>
   );
 }
 

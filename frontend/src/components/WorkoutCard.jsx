@@ -19,7 +19,7 @@ export default function WorkoutCard({ workout }) {
               component="div"
               sx={{ overflowWrap: "break-word" }}
             >
-              {title}
+              <span style={{ paddingRight: "120px" }}>{title}</span>
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -36,7 +36,6 @@ export default function WorkoutCard({ workout }) {
             }}
             onClick={() => {
               window.location.href = `/workoutdetail/${id}`;
-              //adicionar a lógica para exibir os detalhes do treino
               console.log("Detalhes do treino:", workout);
             }}
           >

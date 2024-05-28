@@ -6,6 +6,7 @@ import {
   Typography,
   Grid,
   Box,
+  Container,
 } from "@mui/material";
 import exercisesServerCall from "../services/exercisesServerCall";
 import { useLocation } from "wouter";
@@ -24,9 +25,17 @@ function ExerciseCategories() {
   function handleCardClick(category) {
     setLocation(`/exercises?muscle=${category}`);
   }
+
   return (
-    <>
-      <Box sx={{ marginBottom: "24px", textAlign: "center", fontSize: "24px" }}>
+    <Container sx={{ padding: "16px" }}>
+      <Box
+        sx={{
+          marginBottom: "24px",
+          textAlign: "center",
+          fontSize: "24px",
+          padding: "16px",
+        }}
+      >
         Check out our exercise selection
       </Box>
       <Grid container spacing={3} justifyContent="center">
@@ -53,9 +62,12 @@ function ExerciseCategories() {
               <CardMedia
                 component="img"
                 image={`/img/${category}-icon.png`}
-                // image="/img/category-icon2.png"
                 alt={category}
-                sx={{ width: 60, height: 60, marginBottom: "16px" }} // Ajuste o tamanho do ícone conforme necessário
+                sx={{
+                  width: 60,
+                  height: 60,
+                  marginBottom: "16px",
+                }}
               />
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography variant="h5" component="div">
@@ -66,7 +78,7 @@ function ExerciseCategories() {
           </Grid>
         ))}
       </Grid>
-    </>
+    </Container>
   );
 }
 
