@@ -1,16 +1,17 @@
-import { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
-  Snackbar,
-  IconButton,
-  Input,
+  TextField,
   Button,
-  Card,
-  CardContent,
-  Typography,
+  Snackbar,
   SnackbarContent,
+  Grid,
+  Box,
+  Typography,
+  IconButton,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
+import passwordStrengthService from "../services/passwordStrengthService";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
@@ -18,7 +19,8 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarVariant, setSnackbarVariant] = useState("success"); // Nova variável para controlar a cor da Snackbar
+  const [snackbarVariant, setSnackbarVariant] = useState("success");
+  const [passwordStrength, setPasswordStrength] = useState("");
 
   function handleSnackbarClose() {
     setSnackbarOpen(false);
@@ -34,17 +36,30 @@ function RegisterForm() {
     console.log(result);
 
     if (result.message) {
-      setSnackbarVariant("error"); // Define a cor como vermelho em caso de erro
+      setSnackbarVariant("error");
       setSnackbarMessage("Error registering user");
     } else {
-      setSnackbarVariant("success"); // Define a cor como verde em caso de sucesso
+      setSnackbarVariant("success");
       setSnackbarMessage("User registered successfully");
+
+      // Redireciona após 1,5 segundos
+      setTimeout(() => {
+        window.location.href = "/sign-in";
+      }, 1500);
     }
     setSnackbarOpen(true);
   }
 
+  function handlePasswordChange(event) {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+    setPasswordStrength(
+      passwordStrengthService.checkPasswordStrength(newPassword)
+    );
+  }
+
   return (
-    <>
+    <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
       <Snackbar
         anchorOrigin={{
           vertical: "bottom",
@@ -56,58 +71,74 @@ function RegisterForm() {
       >
         <SnackbarContent
           style={{
-            backgroundColor: snackbarVariant === "error" ? "red" : "green", // Define a cor com base na variável snackbarVariant
+            backgroundColor: snackbarVariant === "error" ? "red" : "green",
           }}
           message={<span id="client-snackbar">{snackbarMessage}</span>}
           action={
-            <>
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleSnackbarClose}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </>
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
           }
         />
       </Snackbar>
       <form onSubmit={handleSubmit}>
-        <Card variant="outlined" sx={{ p: 2, mt: 3 }}>
-          <CardContent>
-            <Typography variant="h5" component="h2" gutterBottom>
-              Register
-            </Typography>
-            <Input
-              placeholder="Username"
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              id="username"
+              label="Username"
+              variant="outlined"
               fullWidth
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              sx={{ mb: 2 }}
             />
-            <Input
-              placeholder="Email"
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="email"
+              label="Email"
+              variant="outlined"
               fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              sx={{ mb: 2 }}
             />
-            <Input
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="password"
+              label="Password"
+              variant="outlined"
               type="password"
-              placeholder="Password"
               fullWidth
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              sx={{ mb: 2 }}
+              onChange={handlePasswordChange}
             />
-            <Button type="submit" variant="contained" color="primary">
+            <Typography
+              variant="body2"
+              style={{
+                color:
+                  passwordStrengthService.getPasswordStrengthColor(
+                    passwordStrength
+                  ),
+                marginTop: "8px",
+              }}
+            >
+              {passwordStrength}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
               Register
             </Button>
-          </CardContent>
-        </Card>
+          </Grid>
+        </Grid>
       </form>
-    </>
+    </Box>
   );
 }
 
