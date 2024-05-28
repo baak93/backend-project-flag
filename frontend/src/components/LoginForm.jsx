@@ -1,16 +1,26 @@
-import { useState } from "react";
-import { TextField, Button, Snackbar, SnackbarContent } from "@mui/material";
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  Snackbar,
+  SnackbarContent,
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
-  const [variant, setVariant] = useState("success");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarVariant, setSnackbarVariant] = useState("success");
 
-  function handleClose() {
-    setOpen(false);
+  function handleSnackbarClose() {
+    setSnackbarOpen(false);
   }
 
   async function handleSubmit(event) {
@@ -19,55 +29,75 @@ function LoginForm() {
     console.log(result);
 
     if (result.status !== "success") {
-      setVariant("error");
-      setMessage("Error trying to login");
+      setSnackbarVariant("error");
+      setSnackbarMessage("Error trying to login");
     } else {
-      setVariant("success");
-      setMessage("Vai para a Página Pessoal");
+      setSnackbarVariant("success");
+      setSnackbarMessage("Vai para a Página Pessoal");
     }
 
-    setOpen(true);
+    setSnackbarOpen(true);
   }
 
   return (
-    <>
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+    <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+      >
         <SnackbarContent
           style={{
-            backgroundColor: variant === "error" ? "red" : "green", // Defina a cor com base na variável de estado "variant"
+            backgroundColor: snackbarVariant === "error" ? "red" : "green",
           }}
-          message={<span id="client-snackbar">{message}</span>}
+          message={<span id="client-snackbar">{snackbarMessage}</span>}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
         />
       </Snackbar>
       <form onSubmit={handleSubmit}>
-        <div className="card">
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
             <TextField
               id="email"
               label="Email"
               variant="outlined"
-              className="mr-2"
+              fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               id="password"
               label="Password"
               variant="outlined"
               type="password"
-              className="mr-2"
+              fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </div>
-          <Button type="submit" variant="contained" color="primary">
-            Sign-in
-          </Button>
-        </div>
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Sign-in
+            </Button>
+          </Grid>
+        </Grid>
       </form>
-    </>
+    </Box>
   );
 }
 
