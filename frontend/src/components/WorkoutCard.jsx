@@ -22,6 +22,7 @@ import workoutsServerCall from "../services/workoutsServerCall";
 // Estilizando o IconButton para ter o mesmo border-radius do botão details
 const CustomIconButton = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(0.8),
 }));
 
 function WorkoutCard({ workout }) {
@@ -58,8 +59,8 @@ function WorkoutCard({ workout }) {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card sx={{ height: "100%", position: "relative" }}>
-        <CardActionArea style={{ flexGrow: 1 }}>
+      <Card sx={{ height: "100%" }}>
+        <CardActionArea>
           <CardContent>
             <Typography
               gutterBottom
@@ -67,11 +68,11 @@ function WorkoutCard({ workout }) {
               component="div"
               sx={{ overflowWrap: "break-word" }}
             >
-              <span style={{ paddingRight: "120px" }}>{title}</span>
+              {title}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions style={{ position: "absolute", bottom: 8, right: 8 }}>
+        <CardActions>
           <CustomIconButton
             onClick={handleDeleteClick}
             sx={{
@@ -81,7 +82,7 @@ function WorkoutCard({ workout }) {
               },
             }}
           >
-            <DeleteIcon />
+            <DeleteIcon fontSize="small" />
           </CustomIconButton>
           <Button
             variant="contained"
