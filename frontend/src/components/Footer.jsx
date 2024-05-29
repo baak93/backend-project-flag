@@ -10,8 +10,6 @@ function Footer() {
     const resizeObserver = new ResizeObserver(() => {
       const contentHeight = document.body.offsetHeight;
       const windowHeight = window.innerHeight;
-      console.log("contentHeight", contentHeight);
-      console.log("windowHeight", windowHeight);
 
       if (contentHeight < windowHeight) {
         setFooterPosition("fixed");

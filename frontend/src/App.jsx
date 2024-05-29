@@ -9,6 +9,7 @@ import WorkoutView from "./views/WorkoutView";
 import WorkoutDetail from "./components/WorkoutDetail";
 import ExercisesView from "./views/ExercisesView";
 import ExerciseDetail from "./components/ExerciseDetail";
+import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         </Route>
         <Route path="/sign-up" component={RegisterForm} />
         <Route path="/sign-in" component={LoginForm} />
+        <Route component={PageNotFound} />
       </Switch>
       <Footer />
     </>
