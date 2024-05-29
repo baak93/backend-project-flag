@@ -12,7 +12,6 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Snackbar,
   styled,
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -25,11 +24,10 @@ const CustomIconButton = styled(IconButton)(({ theme }) => ({
   padding: theme.spacing(0.8),
 }));
 
-function WorkoutCard({ workout }) {
+function WorkoutCard({ workout, onRemove }) {
   const { id, title } = workout;
 
   const [openDialog, setOpenDialog] = useState(false);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   function handleDeleteClick() {
     setOpenDialog(true);
@@ -37,12 +35,10 @@ function WorkoutCard({ workout }) {
 
   async function handleDeleteConfirm() {
     setOpenDialog(false);
+
     try {
       await workoutsServerCall.deleteWorkoutById(id);
-      setSnackbarOpen(true);
-      setTimeout(() => {
-        window.location.reload(); // Atualiza a página após 1,5 segundos
-      }, 1500);
+      onRemove(id);
     } catch (error) {
       console.error("Error deleting workout:", error);
       // Lidar com o erro, se necessário
@@ -51,10 +47,6 @@ function WorkoutCard({ workout }) {
 
   function handleDeleteCancel() {
     setOpenDialog(false);
-  }
-
-  function handleCloseSnackbar() {
-    setSnackbarOpen(false);
   }
 
   return (
@@ -120,13 +112,6 @@ function WorkoutCard({ workout }) {
           </Button>
         </DialogActions>
       </Dialog>
-
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={1500}
-        onClose={handleCloseSnackbar}
-        message="Workout deleted successfully"
-      />
     </Grid>
   );
 }
