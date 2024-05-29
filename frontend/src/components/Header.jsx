@@ -32,7 +32,7 @@ function Header() {
           <NavigationMenu />
 
           <FitnessCenterIcon
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+            sx={{ display: { xs: "none", sm: "flex", md: "none" }, mr: 1 }}
           />
           <Typography
             variant="h5"
@@ -41,7 +41,7 @@ function Header() {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: "none", sm: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
