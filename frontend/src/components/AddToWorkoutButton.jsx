@@ -36,7 +36,6 @@ function AddToWorkoutButton({ exercise }) {
       console.error(error);
     }
     setOpen(true);
-    console.log("workouts", workouts);
   }
 
   function handleClose() {
