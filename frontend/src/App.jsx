@@ -11,6 +11,7 @@ import ExercisesView from "./views/ExercisesView";
 import ExerciseDetail from "./components/ExerciseDetail";
 import PageNotFound from "./components/PageNotFound";
 import Footer from "./components/Footer";
+import ProfileView from "./views/ProfileView";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         </Route>
         <Route path="/sign-up" component={RegisterForm} />
         <Route path="/sign-in" component={LoginForm} />
+        <Route path="/profile" component={ProfileView} />
         <Route component={PageNotFound} />
       </Switch>
       <Footer />

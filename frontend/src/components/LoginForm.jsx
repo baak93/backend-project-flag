@@ -33,7 +33,10 @@ function LoginForm() {
       setSnackbarMessage("Error trying to login");
     } else {
       setSnackbarVariant("success");
-      setSnackbarMessage("Vai para a Página Pessoal");
+      setSnackbarMessage("User loggedin");
+      setTimeout(() => {
+        window.location.href = "/profile";
+      }, 1500);
     }
 
     setSnackbarOpen(true);

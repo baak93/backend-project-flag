@@ -54,6 +54,8 @@ function UserMenu() {
   function handleMenuItemClick(setting) {
     if (setting === "Logout") {
       logout();
+    } else if (setting === "Profile") {
+      window.location.href = "/profile";
     } else {
       handleCloseUserMenu();
       // Implement other settings actions here, if necessary
