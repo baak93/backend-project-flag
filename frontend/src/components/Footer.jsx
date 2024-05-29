@@ -1,33 +1,29 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "wouter";
+
 import { Box, Typography, Link, IconButton } from "@mui/material";
 import { GitHub, LinkedIn } from "@mui/icons-material";
 
 function Footer() {
   const [footerPosition, setFooterPosition] = useState("relative");
-  const [location] = useLocation();
 
-  useEffect(
-    function () {
-      function handleResize() {
-        const contentHeight = document.body.offsetHeight;
-        const windowHeight = window.innerHeight;
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      const contentHeight = document.body.offsetHeight;
+      const windowHeight = window.innerHeight;
+      console.log("contentHeight", contentHeight);
+      console.log("windowHeight", windowHeight);
 
-        //footer height 163px
-        if (contentHeight < windowHeight - 163) {
-          setFooterPosition("fixed");
-        } else {
-          setFooterPosition("relative");
-        }
+      if (contentHeight < windowHeight) {
+        setFooterPosition("fixed");
+      } else {
+        setFooterPosition("relative");
       }
+    });
 
-      handleResize(); // Executa uma vez para definir a posição inicial
+    resizeObserver.observe(document.body);
 
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    },
-    [window.location.pathname]
-  ); // Executa a função ao mudar o URL
+    return () => resizeObserver.disconnect();
+  }, []);
 
   return (
     <Box
@@ -35,6 +31,7 @@ function Footer() {
         position: footerPosition,
         bottom: 0,
         width: "100%",
+        mt: 4,
         py: 2,
         px: 2,
         backgroundColor: "#f5f5f5",

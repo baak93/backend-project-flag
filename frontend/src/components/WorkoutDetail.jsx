@@ -25,7 +25,6 @@ function WorkoutDetail({ id }) {
             workoutDetails.user_id
           );
           setWorkouts(userWorkouts);
-          console.log("userWorkouts", userWorkouts);
         } catch (error) {
           console.error("Error fetching workout details:", error);
         }
