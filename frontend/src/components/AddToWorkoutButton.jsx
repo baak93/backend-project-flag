@@ -49,10 +49,10 @@ function AddToWorkoutButton({ exercise }) {
           selectedWorkout,
           exercise.id
         );
-        console.log("Exercício adicionado à rotina:", selectedWorkout);
+        console.log(`Successfully added exercise to workout.`);
         setOpen(false);
       } catch (error) {
-        console.error("Erro ao adicionar exercício à rotina", error);
+        console.error("Error trying to add the exercise to the workout", error);
       }
     }
   }

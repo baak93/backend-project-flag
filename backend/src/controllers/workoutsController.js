@@ -53,7 +53,7 @@ async function deleteWorkoutById(req, res) {
     const params = [workoutId];
     await connection.promise().query(queryCleanWorkout, params);
     await connection.promise().query(queryDeleteWorkout, params);
-    res.status(204).end(); // Retorna 204 No Content se o treino for excluído com sucesso
+    res.status(204).end();
   } catch (error) {
     console.error("Error deleting workout:", error);
     res.status(500).json({ error: "Error deleting workout" });

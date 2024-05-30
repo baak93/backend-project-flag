@@ -83,7 +83,6 @@ async function getExerciseById(req, res) {
 
 async function postExercise(req, res) {
   const { name, muscle, difficulty, image, instructions } = req.body;
-  // TODO: add validation
 
   try {
     const result = await exercisesDB.insertExercise(
@@ -102,8 +101,7 @@ async function postExercise(req, res) {
 
 async function putExercise(req, res) {
   const { id } = req.params;
-  const { name, muscle, difficulty, instructions } = req.body;
-  // TODO: add validation
+  const { name, muscle, difficulty, image, instructions } = req.body;
 
   try {
     const result = await exercisesDB.updateExercise(
@@ -111,6 +109,7 @@ async function putExercise(req, res) {
       name,
       muscle,
       difficulty,
+      image,
       instructions
     );
 

@@ -3,18 +3,18 @@
 	Create exercise details(80%)
 	maxage para dar validade às cookies
 	Edit workout title
-	Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn) (80%)
 	Edit password 
 	Validade email
 	Secçao antes do footer
-	Footer (ok, position issue)
-	Profile Page
-	Page not found
 
+	ok - Avatar and sign-in/sign-up (sign-in precisa dar refresh à pagina para atualizar o estado userLoggedIn) (80%)
+	ok - Profile Page
+	ok - Page not found
+	ok - Footer
 	ok - Create workout page
 	ok - Create detail exercise page
 	ok - Logout -> delete cookies 
-	ok -> Delete WorkoutCard 
+	ok - Delete WorkoutCard 
 DÚVIDAS
 
 

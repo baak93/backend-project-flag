@@ -33,7 +33,6 @@ function RegisterForm() {
       email,
       password
     );
-    console.log(result);
 
     if (result.message) {
       setSnackbarVariant("error");

@@ -123,11 +123,18 @@ async function insertExercise(name, muscle, difficulty, image, instructions) {
   }
 }
 
-async function updateExercise(id, name, muscle, difficulty, instructions) {
-  const params = [name, muscle, difficulty, instructions, id];
+async function updateExercise(
+  id,
+  name,
+  muscle,
+  difficulty,
+  image,
+  instructions
+) {
+  const params = [name, muscle, difficulty, image, instructions, id];
 
   try {
-    const query = `UPDATE exercises SET name = ?, muscle = ?, difficulty = ?, instructions = ? WHERE id = ?`;
+    const query = `UPDATE exercises SET name = ?, muscle = ?, difficulty = ?, image = ?, instructions = ? WHERE id = ?`;
     const result = await connection.promise().query(query, params);
 
     return result;
