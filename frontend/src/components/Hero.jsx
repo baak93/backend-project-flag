@@ -31,9 +31,6 @@ function Hero() {
           It's time to spice up your exercise routine <br />
           and give your body and mind a fresh challenge
         </Typography>
-        {/* <Button variant="contained" color="error" href="/exercises">
-          Explore Exercises
-        </Button> */}
         <Stack>
           <a
             href="/exercises"

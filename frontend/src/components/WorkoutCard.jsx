@@ -18,7 +18,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import workoutsServerCall from "../services/workoutsServerCall";
 
-// Estilizando o IconButton para ter o mesmo border-radius do botão details
 const CustomIconButton = styled(IconButton)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(0.8),
