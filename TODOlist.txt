@@ -24,3 +24,12 @@ https://bleatingoat.medium.com/use-wouter-to-detect-query-param-changes-51bdb2c7
 
 
 
+
+TODO - SEXTA FEIRA
+
+adicionar mais exercicios na base de dados
+dividir as funçoes do workoutsController com o workoutsDB
+verificar console.logs dos erros
+
+
+

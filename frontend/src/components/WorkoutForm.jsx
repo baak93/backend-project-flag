@@ -49,7 +49,6 @@ function WorkoutForm() {
         return;
       }
 
-      // Cria o objeto de dados a ser enviado para o backend
       const workoutData = {
         title,
         user_id,
@@ -61,7 +60,6 @@ function WorkoutForm() {
       setMessage("Workout created successfully");
       setOpen(true);
 
-      // Redireciona para a página de workouts após uma pequena demora para permitir que a mensagem seja exibida
       setTimeout(() => {
         setLocation("/workouts");
       }, 1500);

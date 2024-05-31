@@ -59,7 +59,6 @@ function ExercisesList() {
 
     setExercises(results);
   }
-  console.log("exercises.length", exercises.length);
 
   useEffect(
     function () {

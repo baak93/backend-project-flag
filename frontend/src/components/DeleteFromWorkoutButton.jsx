@@ -19,11 +19,11 @@ function DeleteExerciseFromWorkoutButton({ exercise, onRemove, workoutId }) {
           exercise.id,
           workoutId
         );
-        console.log("Exercício removido do workout:", workoutId);
-        setOpen(false); // Fecha o diálogo após a remoção
-        onRemove(exercise.id); // Chama a função de remoção passada como prop
+        console.log("Exercise removed from workout.");
+        setOpen(false);
+        onRemove(exercise.id);
       } catch (error) {
-        console.error("Erro ao remover exercício do workout", error);
+        console.error("Error trying to remove exercise from workout.", error);
       }
     }
   }

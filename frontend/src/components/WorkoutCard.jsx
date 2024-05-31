@@ -41,7 +41,6 @@ function WorkoutCard({ workout, onRemove }) {
       onRemove(id);
     } catch (error) {
       console.error("Error deleting workout:", error);
-      // Lidar com o erro, se necessário
     }
   }
 
@@ -89,7 +88,6 @@ function WorkoutCard({ workout, onRemove }) {
             }}
             onClick={() => {
               window.location.href = `/workoutdetail/${id}`;
-              console.log("Detalhes do treino:", workout);
             }}
           >
             Details
