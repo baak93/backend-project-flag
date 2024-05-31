@@ -1,16 +1,27 @@
-import { Message } from "primereact/message";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import { Button } from "primereact/button";
-import { useState, useRef } from "react";
-import { Toast } from "primereact/toast";
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  Snackbar,
+  SnackbarContent,
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarVariant, setSnackbarVariant] = useState("success");
 
-  const toast = useRef(null);
+  function handleSnackbarClose() {
+    setSnackbarOpen(false);
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -18,57 +29,78 @@ function LoginForm() {
     console.log(result);
 
     if (result.status !== "success") {
-      toast.current.show({
-        severity: "error",
-        summary: "Error trying to login",
-        // detail: "Nope",
-      });
+      setSnackbarVariant("error");
+      setSnackbarMessage("Error trying to login");
     } else {
-      toast.current.show({
-        severity: "success",
-        summary: "Pagina Pessoal",
-        // detail: "vai para a pagina pessoal",
-      });
+      setSnackbarVariant("success");
+      setSnackbarMessage("User loggedin");
+      setTimeout(() => {
+        window.location.href = "/profile";
+      }, 1500);
     }
+
+    setSnackbarOpen(true);
   }
 
   return (
-    <>
-      <Toast ref={toast} />
+    <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: snackbarVariant === "error" ? "red" : "green",
+          }}
+          message={<span id="client-snackbar">{snackbarMessage}</span>}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
+        />
+      </Snackbar>
       <form onSubmit={handleSubmit}>
-        <div className="card">
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="email" className="p-sr-only">
-              Email
-            </label>
-            <InputText
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
               id="email"
-              placeholder="Email"
-              className="p-invalid mr-2"
+              label="Email"
+              variant="outlined"
+              fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Message severity="error" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="password" className="p-sr-only">
-              Password
-            </label>
-            <Password
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
               id="password"
-              placeholder="Password"
-              className="p-invalid mr-2"
+              label="Password"
+              variant="outlined"
+              type="password"
+              fullWidth
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              feedback={false}
-              tabIndex={1}
             />
-            <Message severity="error" />
-          </div>
-          <Button type="submit" label="Sign-in" />
-        </div>
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Sign-in
+            </Button>
+          </Grid>
+        </Grid>
       </form>
-    </>
+    </Box>
   );
 }
 

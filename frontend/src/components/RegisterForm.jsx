@@ -1,17 +1,30 @@
-import { Message } from "primereact/message";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
-import { Button } from "primereact/button";
-import { useState, useRef } from "react";
-import { Toast } from "primereact/toast";
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  Snackbar,
+  SnackbarContent,
+  Grid,
+  Box,
+  Typography,
+  IconButton,
+} from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 import usersServerCall from "../services/usersServerCall";
+import passwordStrengthService from "../services/passwordStrengthService";
 
 function RegisterForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarVariant, setSnackbarVariant] = useState("success");
+  const [passwordStrength, setPasswordStrength] = useState("");
 
-  const toast = useRef(null);
+  function handleSnackbarClose() {
+    setSnackbarOpen(false);
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,72 +33,111 @@ function RegisterForm() {
       email,
       password
     );
-    console.log(result);
 
     if (result.message) {
-      toast.current.show({
-        severity: "error",
-        summary: "Error registering user",
-        // detail: "Nope",
-      });
+      setSnackbarVariant("error");
+      setSnackbarMessage("Error registering user");
     } else {
-      toast.current.show({
-        severity: "success",
-        summary: "User registered successfully",
-        // detail: "Nope",
-      });
+      setSnackbarVariant("success");
+      setSnackbarMessage("User registered successfully");
+
+      // Redireciona após 1,5 segundos
+      setTimeout(() => {
+        window.location.href = "/sign-in";
+      }, 1500);
     }
+    setSnackbarOpen(true);
+  }
+
+  function handlePasswordChange(event) {
+    const newPassword = event.target.value;
+    setPassword(newPassword);
+    setPasswordStrength(
+      passwordStrengthService.checkPasswordStrength(newPassword)
+    );
   }
 
   return (
-    <>
-      <Toast ref={toast} />
+    <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={handleSnackbarClose}
+      >
+        <SnackbarContent
+          style={{
+            backgroundColor: snackbarVariant === "error" ? "red" : "green",
+          }}
+          message={<span id="client-snackbar">{snackbarMessage}</span>}
+          action={
+            <IconButton
+              size="small"
+              aria-label="close"
+              color="inherit"
+              onClick={handleSnackbarClose}
+            >
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          }
+        />
+      </Snackbar>
       <form onSubmit={handleSubmit}>
-        <div className="card">
-          <div className="flex flex-wrap align-items-center mb-3 mt-3 gap-2">
-            <label htmlFor="username" className="p-sr-only">
-              Username
-            </label>
-            <InputText
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
               id="username"
-              placeholder="Username"
-              className="p-invalid mr-2"
+              label="Username"
+              variant="outlined"
+              fullWidth
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
-            <Message severity="error" text="Username is required" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="email" className="p-sr-only">
-              Email
-            </label>
-            <InputText
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
               id="email"
-              placeholder="Email"
-              className="p-invalid mr-2"
+              label="Email"
+              variant="outlined"
+              fullWidth
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
-            <Message severity="error" />
-          </div>
-          <div className="flex flex-wrap align-items-center mb-3 gap-2">
-            <label htmlFor="password" className="p-sr-only">
-              Password
-            </label>
-            <Password
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
               id="password"
-              placeholder="Password"
-              className="p-invalid mr-2"
+              label="Password"
+              variant="outlined"
+              type="password"
+              fullWidth
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              tabIndex={1}
+              onChange={handlePasswordChange}
             />
-            <Message severity="error" />
-          </div>
-          <Button type="submit" label="Register" />
-        </div>
+            <Typography
+              variant="body2"
+              style={{
+                color:
+                  passwordStrengthService.getPasswordStrengthColor(
+                    passwordStrength
+                  ),
+                marginTop: "8px",
+              }}
+            >
+              {passwordStrength}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button type="submit" variant="contained" color="primary" fullWidth>
+              Register
+            </Button>
+          </Grid>
+        </Grid>
       </form>
-    </>
+    </Box>
   );
 }
 
