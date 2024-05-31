@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 
-const pages = ["Exercises", "Workouts", "Contacts"];
+const pages = ["Exercises", "Workouts"];
 
 function NavigationMenu() {
   const [anchorElNav, setAnchorElNav] = useState(null);
