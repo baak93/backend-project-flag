@@ -45,7 +45,7 @@ function UserMenu() {
       await cookiesServerCall.logout();
       setLoggedIn(false);
       setUserData(null);
-      window.location.href = "/"; // Redirect to home or login page
+      window.location.href = "/";
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -58,7 +58,6 @@ function UserMenu() {
       window.location.href = "/profile";
     } else {
       handleCloseUserMenu();
-      // Implement other settings actions here, if necessary
     }
   }
 

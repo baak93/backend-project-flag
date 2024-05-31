@@ -9,7 +9,7 @@ function ExerciseSearchBar() {
   async function handleSearch() {
     if (search) {
       setLocation(`/exercises?search=${search}`);
-      window.location.reload(); //not ideal
+      window.location.reload();
     }
   }
 

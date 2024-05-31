@@ -41,7 +41,6 @@ function RegisterForm() {
       setSnackbarVariant("success");
       setSnackbarMessage("User registered successfully");
 
-      // Redireciona após 1,5 segundos
       setTimeout(() => {
         window.location.href = "/sign-in";
       }, 1500);

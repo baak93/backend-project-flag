@@ -8,7 +8,6 @@ import {
   Button,
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
-import { Link } from "wouter";
 
 const pages = ["Exercises", "Workouts", "Contacts"];
 
@@ -74,7 +73,6 @@ function NavigationMenu() {
             onClick={() => {
               window.location.href = `/${page.toLowerCase()}`;
             }}
-            // sx={{ my: 2, color: "#fff", display: "block" }}
             sx={{
               my: 2,
               color: "#fff",

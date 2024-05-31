@@ -17,8 +17,8 @@ import { useLocation } from "wouter";
 function ExercisesList() {
   const [exercises, setExercises] = useState([]);
   const [location, setLocation] = useLocation();
-  const [limit, setLimit] = useState(12); // Default limit
-  const [offset, setOffset] = useState(0); // Default offset
+  const [limit, setLimit] = useState(12);
+  const [offset, setOffset] = useState(0);
 
   const params = new URLSearchParams(window.location.search);
   const muscle = params.get("muscle");
@@ -91,7 +91,7 @@ function ExercisesList() {
   const handleLimitChange = (event) => {
     const newLimit = parseInt(event.target.value, 10);
     setLimit(newLimit);
-    setOffset(0); // Reset offset when limit changes
+    setOffset(0);
     setLocation(buildUrl(newLimit, 0));
   };
 
